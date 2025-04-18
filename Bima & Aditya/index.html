@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Quadratic Function Explorer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">QuadraticMaster</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li class="li-navbar">
+                <a href="calculator.html">Calculator</a></li>
+            <li class="li-navbar">
+                <a href="profil.html">Profile</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="home" class="animate__animated animate__fadeIn">
+            <h1>Explore Quadratic Functions</h1>
+            <p>Interactive learning platform for understanding quadratic functions</p>
+        </section>
+
+        <section id="theory" class="animate__animated animate__fadeIn">
+            <h2>Understanding Quadratic Functions</h2>
+            <div class="theory-card">
+                <h3>Definition</h3>
+                <p>A quadratic function is a polynomial function of degree 2, written in the form:</p>
+                <div class="formula">f(x) = ax² + bx + c</div>
+                <p>where:</p>
+                <ul>
+                    <li>a ≠ 0 (determines opening direction and width)</li>
+                    <li>b affects the axis of symmetry</li>
+                    <li>c is the y-intercept</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="calculator" class="animate__animated animate__fadeIn">
+            <h2>Interactive Calculator</h2>
+            <div class="calculator-container">
+                <div class="input-section">
+                    <div class="coefficient-input">
+                        <label for="a">a:</label>
+                        <input type="range" id="a" min="-5" max="10" step="0.1" value="1">
+                        <span id="a-value">1</span>
+                    </div>
+                    <div class="coefficient-input">
+                        <label for="b">b:</label>
+                        <input type="range" id="b" min="-10" max="10" step="0.1" value="0">
+                        <span id="b-value">0</span>
+                    </div>
+                    <div class="coefficient-input">
+                        <label for="c">c:</label>
+                        <input type="range" id="c" min="-10" max="10" step="0.1" value="0">
+                        <span id="c-value">0</span>
+                    </div>
+                </div>
+
+                <div class="graph-container">
+                    <canvas id="quadraticGraph"></canvas>
+                </div>
+
+                <div class="results">
+                    <h3>Properties:</h3>
+                    <div id="properties"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="examples" class="animate__animated animate__fadeIn">
+            <h2>Example Problems</h2>
+            <div class="example-cards">
+                <!-- Example problems will be dynamically added here -->
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
