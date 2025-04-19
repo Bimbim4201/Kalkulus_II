@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Kalkulus 7</title>
+  <style>
+    /* Reset some default styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Base styling */
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Video background styling */
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    /* Header styling */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: rgba(51, 51, 51, 0.8);
+      color: white;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    header .logo {
+      text-decoration: none; /* Hilangkan garis bawah */
+      color: white; /* Tetap putih */
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav a {
+        color: white;
+        margin-left: 20px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        position: relative; /* Tambahkan ini untuk efek yang lebih smooth */
+    }
+
+    nav a:hover {
+        color: #ddd;
+    }
+
+    /* Tambahkan efek saat ditekan/tap */
+    nav a:active {
+        color: #bbb; /* Warna saat ditekan */
+        transform: scale(0.98); /* Efek tekan kecil opsional */
+    }
+
+    /* Hero Section styling */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .hero .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      animation: fadeInSlideUp 2s ease-out both;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .hero button {
+      background-color: #fff;
+      color: #333;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .hero button:hover {
+      background-color: #ddd;
+    }
+
+    .hero button a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    /* About Section */
+    .about {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #333;
+      padding: 40px;
+      text-align: center;
+      margin: 20px;
+      border-radius: 10px;
+    }
+
+    .about h2 {
+      margin-bottom: 20px;
+      font-size: 32px;
+    }
+
+    .about p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    /* Footer styling */
+    footer {
+      background-color: rgba(51, 51, 51, 0.8);
+      color: white;
+      text-align: center;
+      padding: 10px 20px;
+      position: relative;
+      width: 100%;
+      bottom: 0;
+    }
+
+    /* Animation keyframes */
+    @keyframes fadeInSlideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      50% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Animasi transisi halaman dengan efek slide-out ke kiri */
+    .slide-out {
+      animation: slideOut 1.2s forwards;
+    }
+
+    @keyframes slideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Video Background -->
+  <video autoplay loop muted id="background-video">
+    <source src="LTBL.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Header Section -->
+  <header>
+    <a href="index.html" class="logo">7 MathXplorer</a>
+    <nav>
+      <a href="pages/tim.html">Kelompok</a>
+      <a href="pages/Materi.html">Materi</a>
+      <a href="pages/Quiz.html">Quiz</a>
+      <a href="pages/Kalkulator.html">Kalkulator</a>
+      <a href="pages/Grafik.html">Grafik</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="overlay">
+      <h1>Kelompok 7</h1>
+      <p>Quiz, Materi, Kalkulator dan Grafik</p>
+      <button><a href="https://youtu.be/pn7Zte6-UuE?si=VjFhYmE_gSQH_lh_">Get Started</a></button>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section>
+    <div class="about">
+      <h2>Tentang Kelompok</h2>
+      <p>
+        Kelompok ini adalah kelompok interaktif dan nasionalis, sangat mengedepankan etika dan rasa tanggung jawab, 
+        selain itu kelompok ini adalah kelompok paling bersosial dan aktif dalam bekerja sama.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2024 [Hans Morningstar]. Semua Hak Dilindungi.
+  </footer>
+
+  <!-- Script to set volume and add transition -->
+  <script>
+    const video = document.getElementById('background-video');
+    video.volume = 0.2; // Set volume to 20%
+
+    // Tambahkan event listener untuk semua tautan
+    document.querySelectorAll('nav a, .hero button a').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault(); // Cegah pindah halaman langsung
+        const href = this.getAttribute('href'); // Ambil URL tujuan
+
+        // Tambahkan kelas slide-out ke body
+        document.body.classList.add('slide-out');
+
+        // Tunggu hingga animasi selesai sebelum berpindah halaman
+        setTimeout(() => {
+          window.location.href = href;
+        }, 1000); // Waktu sesuai durasi animasi
+      });
+    });
+  </script>
+</body>
+</html>

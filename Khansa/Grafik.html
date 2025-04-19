@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grafik Fungsi Eksponen</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #f0f7ff, #e6f3ff);
+    }
+
+    .container {
+      padding: 30px;
+      width: 90%;
+      max-width: 800px;
+      margin-top: 50px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(149, 157, 165, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 16px;
+      font-weight: 500;
+      color: #4B5563;
+      margin-bottom: 10px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #E5E7EB;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #374151;
+      outline: none;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .form-group input:focus {
+      border-color: #93C5FD;
+      box-shadow: 0 0 10px rgba(147, 197, 253, 0.2);
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      background: linear-gradient(45deg, #60A5FA, #3B82F6);
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 14px 0;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+    }
+
+    .back-button {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      text-decoration: none;
+      color: #2563EB;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      background: linear-gradient(45deg, #3B82F6, #2563EB);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+    }
+
+    #chart {
+      margin-top: 40px;
+      width: 100%;
+      height: 500px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-group">
+      <label for="function1">Fungsi 1</label>
+      <input type="text" id="function1" value="2*x" placeholder="Masukkan fungsi pertama (contoh: 2*x)" />
+    </div>
+    <div class="form-group">
+      <label for="function2">Fungsi 2</label>
+      <input type="text" id="function2" value="3*x" placeholder="Masukkan fungsi kedua (contoh: 3*x)" />
+    </div>
+    <div class="form-group">
+      <label for="domain">Domain (min, max)</label>
+      <input type="text" id="domain" value="-5,5" placeholder="Masukkan domain min,max (contoh: -5,5)" />
+    </div>
+    <button class="btn" id="generateBtn">Buat Grafik</button>
+    <a href="../index.html" class="back-button">Kembali</a>
+
+    <div id="chart"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjs/lib/browser/math.js"></script>
+  <script>
+    const function1Input = document.getElementById('function1');
+    const function2Input = document.getElementById('function2');
+    const domainInput = document.getElementById('domain');
+    const generateBtn = document.getElementById('generateBtn');
+    const chartDiv = document.getElementById('chart');
+
+    generateBtn.addEventListener('click', () => {
+      try {
+        const function1 = function1Input.value.trim();
+        const function2 = function2Input.value.trim();
+        const domain = domainInput.value.split(',').map(val => parseFloat(val.trim()));
+
+        if (domain.length !== 2 || isNaN(domain[0]) || isNaN(domain[1]) || domain[0] >= domain[1]) {
+          alert('Domain tidak valid. Pastikan formatnya: min,max dengan min < max.');
+          return;
+        }
+
+        const step = (domain[1] - domain[0]) / 100;
+        const data = [];
+
+        for (let x = domain[0]; x <= domain[1]; x += step) {
+          const y1 = math.evaluate(function1, { x });
+          const y2 = math.evaluate(function2, { x });
+          data.push({ x: x.toFixed(2), f1: y1, f2: y2 });
+        }
+
+        const myChart = echarts.init(chartDiv);
+        myChart.setOption({
+          grid: {
+            left: '5%',
+            right: '5%',
+            bottom: '5%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'category',
+            data: data.map(item => item.x),
+            axisLine: { lineStyle: { color: '#4B5563' } },
+            axisLabel: { color: '#4B5563' }
+          },
+          yAxis: {
+            type: 'value',
+            axisLine: { lineStyle: { color: '#4B5563' } },
+            axisLabel: { color: '#4B5563' }
+          },
+          series: [
+            {
+              data: data.map(item => item.f1),
+              type: 'line',
+              name: 'Fungsi 1',
+              smooth: true,
+              lineStyle: { color: '#60A5FA', width: 3 },
+              itemStyle: { color: '#60A5FA' }
+            },
+            {
+              data: data.map(item => item.f2),
+              type: 'line',
+              name: 'Fungsi 2',
+              smooth: true,
+              lineStyle: { color: '#34D399', width: 3 },
+              itemStyle: { color: '#34D399' }
+            }
+          ],
+          tooltip: {
+            trigger: 'axis',
+            textStyle: {
+              color: '#4B5563'
+            },
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            borderColor: '#E5E7EB',
+            borderWidth: 1,
+            padding: 12
+          },
+          legend: {
+            data: ['Fungsi 1', 'Fungsi 2'],
+            top: 'top',
+            textStyle: {
+              color: '#4B5563'
+            }
+          }
+        });
+      } catch (error) {
+        alert('Terjadi kesalahan. Periksa input fungsi dan domain.');
+      }
+    });
+  </script>
+</body>
+</html>

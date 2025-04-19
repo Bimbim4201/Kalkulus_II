@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz 7 Kalkulus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    overflow: hidden;
+}
+
+header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #333;
+      color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    header .logo {
+      text-decoration: none; /* Hilangkan garis bawah */
+      color: white; /* Tetap putih */
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      transition: color 0.3s ease-in-out;
+    }
+
+    nav a:hover {
+      color: #6a11cb;
+    }
+
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 200%;
+}
+
+.home {
+    position: relative;
+    left: -50%;
+    min-height: 100vh;
+    background: url('Klkls.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+    transition: .3s ease;
+}
+
+.home.active {
+    filter: blur(5px);
+}
+
+.home {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-content {
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.home-content h1{
+    font-size: 70px;
+    font-weight: 700;
+    text-shadow: 0 0 20px rgba(0,0,0, .3);
+}
+
+.home-content .start-btn{
+    width: 190px;
+    height: 55px;
+    background: #00c3ff;
+    border: 2px solid white;
+    outline: none;
+    border-radius: 6px;
+    box-shadow: 0 0 40px #0400ff;
+    color: white;
+    letter-spacing: 1px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.home-content .start-btn:hover {
+    background: #09001d;
+    box-shadow: none;
+}
+
+.popup-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(.9);
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    background: white;
+    border-radius: 6px;
+    padding: 10px 25px;
+    opacity: 0;
+    pointer-events: none;
+    transition: .3 ease;
+}
+
+.popup-info.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup-info h2 {
+    font-size: 50px;
+    color: black;
+}
+
+.popup-info .info {
+    display: inline-block;
+    font-size: 16px;
+    color: gray;
+    margin: 4px 0;
+}
+
+.popup-info .btn-group{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #00f7ff;
+    margin-top: 10px;
+    padding: 15px 0 7px;
+}
+
+.popup-info .btn-group .info-btn{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+    height: 45px;
+    background: #00eeff;
+    border: 2px solid #03d9ff;
+    outline: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 0 10px rga(0,0,0, .1);
+    cursor: pointer;
+    transition: .5s;
+}
+
+.popup-info .btn-group .info-btn:nth-child(1){
+    background:#00eeff;
+    color: #e7e7e7;
+}
+
+.popup-info .btn-group .info-btn:nth-child(1):hover {
+    background: #00d9ff;
+    color: #ff0000;
+}
+
+.popup-info .btn-group .info-btn:nth-child(2):hover {
+    background: #00c3ff;
+    color: rgb(25, 0, 253);
+}
+
+.quiz-section{
+    position: relative;
+    left: -50%;
+    width: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transition: .8s ease-in-out;
+    transition-delay: .25s;
+}
+
+.quiz-section.active {
+    left: 0;
+}
+
+.quiz-section .quiz-box {
+    position: relative;
+    width: 500px;
+    background: transparent;
+    border: 2px solid #00d9ff;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(.9);
+    transition: .3s ease;
+    transition-delay: 0s;
+}
+
+.quiz-section .quiz-box.active{
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+    transition: 1s ease;
+    transition-delay: 1s;
+}
+
+.quiz-box h1{
+    font-size: 32px;
+    text-align: center;
+    background: linear-gradient(45deg, transparent, #0fdbff, transparent);
+    border-radius: 6px;
+}
+
+.quiz-box .quiz-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 2px solid #00f7ff;
+    margin-bottom: 30px;
+}
+
+.quiz-header span {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.quiz-header .header-score {
+    background: #00ffff;
+    border-radius: 3px;
+    padding: 7px;
+}
+
+.quiz-box .question-text {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.option-list .option {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    font-size: 17px;
+    margin: 15px 0;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.option-list .option.correct {
+    background: white;
+    color: #00a63d;
+    border-color: #00a63d;
+}
+
+.option-list .option.incorrect {
+    background: white;
+    color: #ff0000;
+    border-color: #ff0000;
+}
+
+.option-list .option.disabled {
+    pointer-events: none;
+
+}
+
+.option-list .option:hover {
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.quiz-box .quiz-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #00f7ff;
+    padding-top: 20px;
+    margin-top: 25px;
+}
+
+.quiz-footer .question-total{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.quiz-footer .next-btn {
+    width: 100px;
+    height: 45px;
+    background: rgba(0,0,0, .1);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    outline: none;
+    border-radius: 6px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.444);
+    font-weight: 600;
+    cursor: pointer;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.quiz-footer .next-btn.active {
+    pointer-events: auto;
+    background: #00f7ff;
+    border-color: #00fff2;
+    color: white;
+}
+
+.quiz-footer .next-btn.active:hover{
+    background: #00ffff;
+    border-color: #00e1ff;
+}
+
+.quiz-section .result-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(9);
+    width: 500px;
+    background: transparent;
+    border: 2px solid #00f4fc;
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: .3s ease;
+}
+
+.quiz-section .result-box.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.result-box h2{
+    font-size: 52px;
+}
+
+.bar-container {
+    position: relative;
+    width: 100px;
+    height: 300px;
+    background: #eee;
+    border: 2px solid #00eeff;
+    border-radius: 10px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: #ddd;
+}
+
+.fill {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    background: #0a9df1;
+    transition: height 1s ease-in-out;
+}
+
+.percentage-text {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Animasi untuk ucapan selamat */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.animation {
+    font-size: 24px;
+    color: #1d5ce4;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.result-box .buttons{
+    display: flex;
+}
+
+.buttons button {
+    width: 130px;
+    height: 47px;
+    background: #00e1ff;
+    border: 2px solid #00e1ff;
+    outline: none;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #ffff;
+    font-weight: 600;
+    margin: 0 20px 20px;
+    cursor: pointer;
+}
+
+.buttons button:nth-child(1):hover {
+    background: #00e1ff;
+    border-color: #00f7ff;
+}
+
+.buttons button:nth-child(2) {
+    background: transparent;
+    color: #00e1ff;
+}
+
+.buttons a {
+    display: inline-block;
+    width: 130px;
+    height: 47px;
+    background: transparent;
+    color: #00d9ff;
+    border: 2px solid #00e1ff;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 47px; /* Untuk menyesuaikan teks di tengah */
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0 20px 20px;
+}
+
+.buttons a:hover {
+    background: #00f7ff;
+    color: #fff;
+}
+
+.page-transition-expand {
+    animation: expandPage 1s ease-in-out forwards;
+}
+
+@keyframes expandPage {
+    0% {
+        transform: scale(0.1);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+    </style>
+
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="logo">7 MathXplorer</a>
+        <nav>
+          <a href="tim.html">Kelompok</a>
+          <a href="Materi.html">Materi</a>
+          <a href="Quiz.html">Quiz</a>
+          <a href="Kalkulator.html">Kalkulator</a>
+          <a href="Grafik.html">Grafik</a>
+        </nav>
+      </header>
+<div class="container">
+    <section class="quiz-section">
+        <div class="quiz-box">
+            <h1>Quiz Turunan</h1>
+            <div class="quiz-header">
+                <span>Quiz Kalkulus Turunan</span>
+                <span class="header-score">Score : 0 / 5</span>
+            </div>
+
+            <h2 class="question-text">What does HTML stand for?</h2>
+            
+            <div class="option-list">
+                <!-- <div class="option">
+                    <span>A. Hyper Type Multi Language</span>
+                </div>
+                <div class="option">
+                    <span>B. Hyper Text Multiple Language</span>
+                </div>
+                <div class="option">
+                    <span>C. Hyper Text Markup Language</span>
+                </div>
+                <div class="option">
+                    <span>D. Home Text Multi Language</span>
+                </div> -->
+            </div>
+
+            <div class="quiz-footer">
+                <span class="question-total">1 of 5 Questions</span>
+                <button class="next-btn">Next</button>
+            </div>
+        </div>
+
+        <div class="result-box">
+            <h2>Quiz Result!</h2>
+            <div class="bar-container">
+                <div class="bar">
+                    <div class="fill"></div>
+                </div>
+                <span class="percentage-text">0%</span>
+            </div>
+            <span class="score-text">Your Score 0 out of 7</span>
+            <div class="buttons">
+                <button class="tryAgain-btn">Try Again</button>
+                <a href="../index.html" class="goHome-btn">Go To Home</a>
+            </div>
+        </div>
+        
+    </section>
+
+    <section class="home">
+        <div class="home-content">
+            <h1>Quiz 7 Fungsi Eksponen</h1>
+            <button class="start-btn">Start Quiz</button>
+        </div>
+    </section>
+</div>
+    
+    <div class="popup-info">
+        <h2>Quiz Guide</h2>
+        <span class="info">1. Jawaban harus benar dan baik tidak boleh salah</span>
+        <span class="info">2. Jangan lupa untuk menghitung terlebih dahulu jawabannya</span>
+        <span class="info">3. SEMANGAT!</span>
+
+    <div class="btn-group">
+        <a href="../index.html" class="info-btn exit-btn">Exit Quiz</a>
+        <a href="#" class="info-btn continue-btn">Continue</a>
+    </div>
+    </div>
+
+
+    <script> 
+        let questions = [
+    {
+        numb: 1,
+        question: " Bentuk umum ℎ(𝑥) dan nilai ℎ(2) dari (f(x)=2^ˣ⁺¹ g(x)=3²ˣ⁻¹) ",
+        answer: "D. 216",
+        options: [
+            "A. 72",
+            "B. 108",
+            "C. 82",
+            "D. 216"
+        ]
+    },
+    {
+        numb: 2,
+        question: "4²ˣ⁺¹ = 6⁴ˣ⁻¹",
+        answer: "A. 4",
+        options: [
+            "A. 4",
+            "B. 12",
+            "C. 16",
+            "D. 20"
+        ]
+    },
+    {
+        numb: 3,
+        question: "Titik potong dan nilai maksimum ℎ(𝑥) = 𝑓(𝑥) − 𝑔(𝑥) dari f(x)=5ˣ, 𝑔(𝑥)=5⁻ˣ ",
+        answer: "C. 4.8",
+        options: [
+            "A. 3.2",
+            "B. 2.8",
+            "C. 4.8",
+            "D. 5.2"
+        ]
+    },
+    {
+        numb: 4,
+        question: "2ˣ+3ʸ=35, 2ˣ⁺¹−3ʸ⁻¹=10",
+        answer: "A. x=Log₂13, y=3",
+        options: [
+            "A. x=Log₂13, y=3",
+            "B. x= 2, y= 6",
+            "C. x=4, y= 8",
+            "D. x=Log₂6, y=24"
+        ]
+    },
+    {
+        numb: 5,
+        question: "Jika f(x) = ( 2x-1)² (x+2), maka f'(x)= ",
+        answer: "D. (2x 1)(6x+7)",
+        options: [
+            "A. 4(2x-1)(x+3) ",
+            "B. 2( 2x-1) ( 5x + 6) ",
+            "C. (2x-1)(6x+11) ",
+            "D. (2x 1)(6x+7)"
+        ]
+    }
+];
+
+const startBtn = document.querySelector('.start-btn');
+const popupInfo = document.querySelector('.popup-info');
+const home = document.querySelector('.home');
+const exitBtn = document.querySelector('.exit-btn');
+const continueBtn = document.querySelector('.continue-btn');
+const quizSection = document.querySelector('.quiz-section');
+const quizBox = document.querySelector('.quiz-box');
+const resultBox = document.querySelector('.result-box');
+const tryAgainBtn = document.querySelector('.tryAgain-btn');
+const goHomeBtn = document.querySelector('.goHome-btn');
+
+
+startBtn.onclick = () => {
+    popupInfo.classList.add('active');
+    home.classList.add('active');
+}
+
+exitBtn.onclick = () => {
+    popupInfo.classList.remove('active');
+    home.classList.remove('active');
+}
+
+continueBtn.onclick = () => {
+    quizSection.classList.add('active');
+    popupInfo.classList.remove('active');
+    home.classList.remove('active');
+    quizBox.classList.add('active');
+
+    showQuestions(0);
+    questionCounter(1);
+    headerScore();
+}
+
+tryAgainBtn.onclick = () => {
+    quizBox.classList.add('active');
+    nextBtn.classList.remove('active');
+    resultBox.classList.remove('active');
+
+    questionCount = 0;
+    questionNumb = 1;
+    userScore = 0;
+    showQuestions(questionCount);
+    questionCounter(questionNumb);
+
+    headerScore();
+}
+
+goHomeBtn.onclick = () => {
+    quizSection.classList.remove('active');
+    nextBtn.classList.remove('active');
+    resultBox.classList.remove('active');
+
+    questionCount = 0;
+    questionNumb = 1;
+    userScore = 0;
+    showQuestions(questionCount);
+    questionCounter(questionNumb);
+
+    headerScore();
+}
+
+let questionCount = 0;
+let questionNumb = 1;
+let userScore = 0;
+
+const nextBtn = document.querySelector('.next-btn');
+
+nextBtn.onclick = () => {
+    if (questionCount < questions.length -1){
+        questionCount++;
+        showQuestions(questionCount);
+
+        questionNumb++;
+        questionCounter(questionNumb);
+
+        nextBtn.classList.remove('active');
+    }
+    else {
+        showResultBox();
+    }
+}
+
+const optionList = document.querySelector('.option-list');
+
+function showQuestions(index) {
+    const questionText = document.querySelector('.question-text');
+    questionText.textContent = `${questions[index].numb}. ${questions[index].question}`;
+
+    let optionTag = `<div class="option"><span>${questions[index].options[0]}</span></div>
+        <div class="option"><span>${questions[index].options[1]}</span></div>
+        <div class="option"><span>${questions[index].options[2]}</span></div>
+        <div class="option"><span>${questions[index].options[3]}</span></div>`;
+
+    optionList.innerHTML = optionTag;
+
+    const option = document.querySelectorAll('.option');
+    for (let i = 0; i < option.length; i++) {
+        option[i].setAttribute('onclick', 'optionSelected(this)');
+    }
+}
+
+function optionSelected(answer) {
+    let userAnswer = answer.textContent;
+    let correctAnswer = questions[questionCount].answer;
+    let allOptions = optionList.children.length;
+
+    if (userAnswer == correctAnswer) {
+        answer.classList.add('correct');
+        userScore +=1; 
+        headerScore();
+    }
+    else {
+        answer.classList.add('incorrect');
+
+        for (let i = 0; i < allOptions; i++) {
+           if (optionList.children[i].textContent == correctAnswer) {
+               optionList.children[i].setAttribute('class', 'option correct');
+           }
+        }
+    }
+
+    for (let i = 0; i < allOptions; i++) {
+        optionList.children[i].classList.add('disabled');
+    }
+
+    nextBtn.classList.add('active');
+}
+
+function questionCounter(index) {
+    const questionTotal = document.querySelector('.question-total');
+    questionTotal.textContent = `${index} of ${questions.length} Questions`;
+}
+
+function headerScore() {
+    const headerScoreText = document.querySelector('.header-score');
+    headerScoreText.textContent = `Score: ${userScore} / ${questions.length}`;
+}
+
+function showResultBox() {
+    quizBox.classList.remove('active'); // Sembunyikan kotak kuis
+    resultBox.classList.add('active'); // Tampilkan kotak hasil
+
+    const scoreText = document.querySelector('.score-text');
+    scoreText.textContent = `Your Score ${userScore} out of ${questions.length}`;
+
+    const percentageText = document.querySelector('.percentage-text');
+    const fillBar = document.querySelector('.fill');
+    let percentage = Math.round((userScore / questions.length) * 100);
+
+    // Atur tinggi bar dan teks persentase
+    fillBar.style.height = `${percentage}%`;
+    percentageText.textContent = `${percentage}%`;
+
+    // Animasi lucu jika mencapai 100%
+    if (percentage === 100) {
+        const resultBox = document.querySelector('.result-box');
+        resultBox.innerHTML += `
+            <div class="animation">
+                🎉 Congratulations! 🎉
+            </div>`;
+        document.querySelector('.animation').style.animation = "bounce 1s infinite";
+    }
+}
+
+document.querySelectorAll('nav a, .goHome-btn, .exit-btn').forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault(); // Mencegah pindah halaman langsung
+        const targetURL = this.getAttribute('href'); // Ambil URL tujuan
+
+        // Tambahkan kelas animasi pada body
+        document.body.classList.add('page-transition-expand');
+
+        // Pindah halaman setelah animasi selesai
+        setTimeout(() => {
+            window.location.href = targetURL;
+        }, 1000); // Durasi animasi sesuai dengan CSS
+    });
+});
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fungsi Eksponen</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        color: #333;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background-color: #333;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    header .logo {
+      text-decoration: none; /* Hilangkan garis bawah */
+      color: white; /* Tetap putih */
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav a {
+        color: white;
+        margin-left: 20px;
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+    }
+
+    nav a:hover {
+        color: #6a11cb;
+    }
+
+    h1, h2 {
+        text-align: center;
+        color: #2c3e50;
+    }
+
+    .content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 800px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    ul {
+        list-style-type: square;
+        margin-left: 20px;
+    }
+
+    code {
+        background: #eaeaea;
+        padding: 2px 5px;
+        border-radius: 5px;
+    }
+    /* Animasi transisi halaman dengan efek spin */
+    .spin-out {
+        animation: spinOut 1.2s forwards;
+    }
+
+    @keyframes spinOut {
+        from {
+            transform: rotate(0deg);
+            opacity: 1;
+        }
+        to {
+            transform: rotate(360deg);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="logo">7 MathXplorer</a>
+        <nav>
+          <a href="tim.html">Kelompok</a>
+          <a href="Materi.html">Materi</a>
+          <a href="Quiz.html">Quiz</a>
+          <a href="Kalkulator.html">Kalkulator</a>
+          <a href="Grafik.html">Grafik</a>
+        </nav>
+      </header>
+
+    <div class="content">
+        <h1>Materi Fungsi Eksponen</h1>
+        <h2>1. Pengertian Fungsi Eksponen</h2>
+        <p>
+            Fungsi eksponen adalah fungsi matematika di mana variabelnya menjadi pangkat (eksponen) dari suatu bilangan tetap (basis). Bentuk umumnya adalah: 
+            <code>f(x) = a^x</code>
+        </p>
+        <ul>
+            <li><b>a</b> adalah basis (bilangan pokok), dengan syarat <code>a > 0</code> dan <code>a ≠ 1</code>.</li>
+            <li><b>x</b> adalah eksponen (variabel).</li>
+        </ul>
+        <p>Jika <code>a > 1</code>, fungsi bersifat menaik (increasing). Jika <code>0 < a < 1</code>, fungsi bersifat menurun (decreasing).</p>
+
+        <h2>2. Sifat-sifat Fungsi Eksponen</h2>
+        <ul>
+            <li><b>Sifat 1:</b> <code>a^0 = 1</code></li>
+            <li><b>Sifat 2:</b> <code>a^x * a^y = a^(x+y)</code></li>
+            <li><b>Sifat 3:</b> <code>a^x / a^y = a^(x-y)</code></li>
+            <li><b>Sifat 4:</b> <code>(a^x)^y = a^(x*y)</code></li>
+            <li><b>Sifat 5:</b> <code>a^(-x) = 1 / a^x</code></li>
+        </ul>
+
+        <h2>3. Grafik Fungsi Eksponen</h2>
+        <p>
+            Grafik fungsi eksponen memiliki ciri khas yang dapat dibedakan berdasarkan nilai basisnya:
+        </p>
+        <ul>
+            <li>Jika <code>a > 1</code>: Grafik akan naik dari kiri ke kanan, semakin tinggi seiring bertambahnya nilai <code>x</code>.</li>
+            <li>Jika <code>0 < a < 1</code>: Grafik akan turun dari kiri ke kanan, semakin mendekati 0 seiring bertambahnya nilai <code>x</code>.</li>
+        </ul>
+
+        <h2>4. Aplikasi Fungsi Eksponen</h2>
+        <p>Fungsi eksponen punya banyak aplikasi dalam kehidupan sehari-hari. Berikut beberapa contoh penerapannya:</p>
+        <ul>
+            <li><b>Pertumbuhan Populasi:</b> Menggunakan rumus <code>P(t) = P0 * e^(rt)</code>.</li>
+            <li><b>Pertumbuhan Bunga Bank:</b> Menggunakan rumus <code>A = P * (1 + r/n)^(nt)</code>.</li>
+            <li><b>Peluruhan Radioaktif:</b> Menggunakan rumus <code>N(t) = N0 * e^(-kt)</code>.</li>
+        </ul>
+
+        <h2>5. Contoh Soal dan Pembahasan</h2>
+        <p><b>Contoh 1:</b></p>
+        <p>
+            Diketahui fungsi <code>f(x) = 3^x</code>. Tentukan nilai dari <code>f(2)</code> dan <code>f(-1)</code>.<br>
+            <b>Pembahasan:</b><br>
+            <code>f(2) = 3^2 = 9</code><br>
+            <code>f(-1) = 3^(-1) = 1/3</code>
+        </p>
+        <p><b>Contoh 2:</b></p>
+        <p>
+            Jumlah penduduk suatu desa pada tahun 2020 adalah 1.000 orang. Jika tingkat pertumbuhan penduduk adalah 5% per tahun, berapakah perkiraan jumlah penduduk pada tahun 2025?<br>
+            <b>Pembahasan:</b><br>
+            Gunakan rumus pertumbuhan eksponensial: <code>P(t) = P0 * (1 + r)^t</code><br>
+            <code>P(5) = 1000 * (1 + 0.05)^5 ≈ 1276</code><br>
+            Jadi, pada tahun 2025, jumlah penduduk diperkirakan sekitar 1.276 orang.
+        </p>
+
+        <h2>6. Referensi</h2>
+        <ul>
+            <li>Buku "Precalculus" oleh James Stewart</li>
+            <li>Buku "Calculus: Early Transcendentals" oleh James Stewart</li>
+            <li><a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:exponential-functions" target="_blank">Khan Academy - Exponential Functions</a></li>
+            <li>Channel YouTube 3Blue1Brown</li>
+        </ul>
+        <ul>
+            <li>
+                <a href="../index.html">Kembali</a>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        document.querySelectorAll('nav a, .content a').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault(); // Cegah pindah halaman langsung
+            const href = this.getAttribute('href'); // Ambil URL tujuan
+
+            // Tambahkan kelas animasi spin-out ke body
+            document.body.classList.add('spin-out');
+
+            // Tunggu hingga animasi selesai sebelum berpindah halaman
+            setTimeout(() => {
+                window.location.href = href;
+            }, 1000); // Waktu sesuai durasi animasi
+        });
+    });
+    </script>
+
+
+</body>
+</html>

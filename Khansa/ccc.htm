@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator</title>
+</head>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+    }
+    
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #e3edf7;
+        overflow: hidden;
+    }
+
+    header {
+    position: fixed; /* Tetap di atas halaman */
+    top: 0;
+    left: 0;
+    width: 95%; /* Pastikan mengambil lebar penuh */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #333; /* Warna latar belakang */
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Efek bayangan */
+    z-index: 1000; /* Pastikan berada di depan elemen lainnya */
+    }
+
+    header .logo {
+      text-decoration: none; /* Hilangkan garis bawah */
+      color: white; /* Tetap putih */
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav {
+    display: flex; /* Membuat tautan horizontal */
+    }
+
+    nav a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+        }
+
+    nav a:hover {
+    color: #6a11cb; /* Warna efek hover */  
+    }
+    
+    .calci {
+        position: relative;
+        padding: 20px;
+        width: 376px;
+        border-radius: 8px;
+        background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5));
+        box-shadow: 3px 3px 9px #cbced1, -3px -3px 9px #cbced1;
+    }
+    
+    .calci::before {
+        content: "";
+        position: absolute;
+        top: -12rem;
+        left: -12rem;
+        width: 12rem;
+        height: 12rem;
+        background: #c3adf3;
+        border-radius: 50%;
+        filter: blur(25px);
+        z-index: -2;
+    }
+    
+    .box {
+        position: relative;
+    }
+    
+    .box::before {
+        content: "";
+        position: absolute;
+        bottom: -12rem;
+        right: -12rem;
+        width: 12rem;
+        height: 12rem;
+        background: hsl(176deg, 57%, 72%);
+        border-radius: 50%;
+        z-index: -2;
+        filter: blur(25px);
+    }
+    
+    .display {
+        position: relative;
+        margin-bottom: 1rem;
+        padding-right: 0.7rem;
+    }
+    
+    .display input {
+        padding: 1.1rem 0;
+        padding-right: 0.8rem;
+        font-size: 1.4rem;
+        text-align: end;
+        color: rgba(16, 16, 16, 0.9);
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        text-shadow: 1px 1px 1px rgba(16, 16, 16, 0.1), 1px 1px 1px rgba(16, 16, 16, 0.1), 1px 1px 1px rgba(16, 16, 16, 0.1), ;
+        box-shadow: inset 8px 8px 8px #cbced1,
+            inset -8px -8px 8px #ffffff;
+    }
+    
+    .btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .btns button {
+        width: 2.5rem;
+        height: 2.5rem;
+        border: none;
+        outline: none;
+        border-radius: .1rem;
+        box-shadow: 13px 13px 20px rgba(16, 16, 16, 0.1), -5px -5px 8px #fff;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    .btns button:hover {
+        background: #7f46fe;
+        color: #fff;
+        box-shadow: inset 5px 5px 8px rgba(16, 16, 16, 0.1);
+    }
+    
+    .btns button:nth-child(1) {
+        
+        background: rgba(174, 236, 205);
+        color: #ffff;
+    }
+
+    .btns button:nth-child(2) {
+        
+        background: rgb(236, 174, 174);
+        color: #ffff;
+    }
+    
+    .btns button:nth-last-child(2) {
+        position: relative;
+        width: 8.5rem;
+        font-size: 1.2rem;
+        background: #b9a0ef;
+        color: #ffff;
+    }
+    
+    .btns button:nth-child(1n):hover {
+        background: rgba(140, 185, 245);
+    }
+    
+    .btns button:nth-child(2n):hover {
+        background: hsl(320deg, 100%, 78%);
+    }
+    
+    .btns button:nth-child(3n):hover {
+        background: hsl(176deg, 57%, 72%);
+    }
+    
+    .btns button:nth-child(4n):hover {
+        background: rgba(174, 236, 205);
+    }
+    
+    .btns button:nth-child(5n):hover {
+        background: #9e78f1;
+    }
+    .flip-out {
+        animation: flipOut 1s forwards;
+    }
+
+    @keyframes flipOut {
+        from {
+            transform: rotateY(0deg);
+            opacity: 1;
+        }
+        to {
+            transform: rotateY(180deg);
+            opacity: 0;
+        }
+    }
+    </style>
+
+<body>
+    <div class="calci">
+        <div class="box">
+            <div class="display">
+                <input type="text" placeholder="0" id="screen">
+            </div>
+
+            <div class="content">
+                <div class="btns">
+                    <button class="btn">CE</button>
+                    <button id="ac" onclick="screen.value=''">AC</button>
+                    <button class="btn">(</button>
+                    <button class="btn">)</button>
+                    <button style="--i:0" class="btn">7</button>
+                    <button style="--i:1" class="btn">8</button>
+                    <button style="--i:2" class="btn">9</button>
+                    <button class="btn">÷</button>
+                    <button class="btn">sin</button>
+                    <button class="btn">π</button>
+                    <button class="btn">X!</button>
+                    <button class="btn">.</button>
+                    <button style="--i:3" class="btn">4</button>
+                    <button style="--i:4" class="btn">5</button>
+                    <button style="--i:5" class="btn">6</button>
+                    <button class="btn">×</button>
+                    <button class="btn">cos</button>
+                    <button class="btn">log</button>
+                    <button class="btn">e</button>
+                    <button class="btn">%</button>
+                    <button style="--i:6" class="btn">1</button>
+                    <button style="--i:7" class="btn">2</button>
+                    <button style="--i:8" class="btn">3</button>
+                    <button class="btn">-</button>
+                    <button class="btn">tan</button>
+                    <button class="btn">x²</button>
+                    <button class="btn">√</button>
+                    <button class="btn">0</button>
+                    <button style="--i:33" class="evalBtn">=</button>
+                    <button style="--i:34" class="btn">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+    <header>
+    <a href="../index.html" class="logo">7 MathXplorer</a>
+    <nav>
+      <a href="tim.html">Kelompok</a>
+      <a href="Materi.html">Materi</a>
+      <a href="Quiz.html">Quiz</a>
+      <a href="Kalkulator.html">Kalkulator</a>
+      <a href="Grafik.html">Grafik</a>
+    </nav>
+    </header>
+
+<script>var btn = document.querySelectorAll('.btn');
+    var screen = document.getElementById('screen');
+    
+    for (var i = 0; i < btn.length; i++) {
+        btn[i].addEventListener('click', (e) => {
+            var btnText = e.target.innerText;
+    
+            if (btnText == "CE") {
+                btnText = "";
+                screen.value = screen.value.substr(0, screen.value.length - 1);
+            }
+
+            if (btnText == "AC") {
+                btnText = "";
+                screen.value = screen.value.substr(0);
+            }
+    
+            if (btnText == "÷") {
+                btnText = "/";
+            }
+    
+            if (btnText == "sin") {
+                btnText = "";
+                screen.value = Math.sin(screen.value);
+            }
+    
+            if (btnText == "π") {
+                btnText = "3.14";
+            }
+    
+            if (btnText == "X!") {
+                btnText = "";
+    
+                var i, num, f;
+    
+                f = 1;
+    
+                num = screen.value;
+    
+                for (i = 1; i <= num; i++) {
+                    f = f * i;
+                }
+    
+                i = i - 1;
+    
+                screen.value = f;
+            }
+    
+            if (btnText == "×") {
+                btnText = "*";
+            }
+    
+            if (btnText == "cos") {
+                btnText = '';
+                screen.value = Math.cos(screen.value);
+            }
+    
+            if (btnText == "log") {
+                btnText = '';
+                screen.value = Math.log(screen.value);
+            }
+    
+            if (btnText == "e") {
+                btnText = '2.718281828459045';
+            }
+    
+            if (btnText == "tan") {
+                btnText = '';
+                screen.value = Math.tan(screen.value);
+            }
+    
+            if (btnText == "x²") {
+                btnText = '';
+                screen.value = Math.pow(screen.value, 2);
+            }
+    
+            if (btnText == "√") {
+                btnText = '';
+                screen.value = Math.sqrt(screen.value);
+            }
+    
+            screen.value += btnText;
+        })
+    }
+    
+    var evalBtn = document.querySelector('.evalBtn')
+    evalBtn.addEventListener('click', () => {
+        screen.value = eval(screen.value);
+    })
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault(); // Cegah langsung berpindah halaman
+            const href = this.getAttribute('href'); // Ambil URL tujuan
+
+            // Tambahkan kelas animasi flip-out ke body
+            document.body.classList.add('flip-out');
+
+            // Tunggu hingga animasi selesai sebelum berpindah halaman
+            setTimeout(() => {
+                window.location.href = href;
+            }, 1000); // Waktu sesuai durasi animasi
+        });
+    });
+    </script>
+</html>

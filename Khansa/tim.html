@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Kelompok 7</title>
+  <style>
+    /* Reset styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffffff, #000000);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Video background styling */
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    /* Header styling */
+    header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: rgba(51, 51, 51, 0.8);
+      color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+    }
+
+    header .logo {
+      text-decoration: none; /* Hilangkan garis bawah */
+      color: white; /* Tetap putih */
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      transition: color 0.3s ease-in-out;
+    }
+
+    nav a:hover {
+      color: #6a11cb;
+    }
+
+    /* Container for profile cards */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 30px;
+      z-index: 10;
+    }
+
+    .profile-card {
+      background: rgba(255, 255, 255, 0.9);
+      width: 250px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .profile-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .profile-card .info {
+      padding: 20px;
+    }
+
+    .profile-card .info h2 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .profile-card .info p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .profile-card .socials {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .socials a {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      background: #2575fc;
+      color: #fff;
+      border-radius: 50%;
+      line-height: 30px;
+      font-size: 16px;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+
+    .socials a:hover {
+      background: #6a11cb;
+    }
+
+    /* Page transition animation */
+    .page {
+      transform: scale(1);
+      opacity: 1;
+      transform-origin: center;
+      transition: transform 1s ease, opacity 1s ease;
+    }
+
+    .page.zoom-out {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+  </style>
+</head>
+<body class="page">
+  <!-- Video Background -->
+  <video autoplay loop muted id="background-video">
+    <source src="FIRE.mp4" type="video/mp4">
+    <source src="FIRE.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Header Section -->
+  <header>
+    <a href="../index.html" class="logo">7 MathXplorer</a>
+    <nav>
+      <a href="tim.html">Kelompok</a>
+      <a href="Materi.html">Materi</a>
+      <a href="Quiz.html">Quiz</a>
+      <a href="Kalkulator.html">Kalkulator</a>
+      <a href="Grafik.html">Grafik</a>
+    </nav>
+  </header>
+
+  <!-- Profile Cards Section -->
+  <div class="container">
+    <!-- Profile 1 -->
+    <div class="profile-card">
+      <img src="Khansa.jpg" alt="Profile Picture">
+      <div class="info">
+        <h2>Khansa Rasendriya A</h2>
+        <p>247006111132</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/share/15Gy8qgPro/">F</a>
+          <a href="http://t.me/HansMurdock">T</a>
+          <a href="https://www.instagram.com/murd_hans?igsh=MzNlNGNkZWQ4Mg==">I</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile 2 -->
+    <div class="profile-card">
+      <img src="Rozan.jpg" alt="Profile Picture">
+      <div class="info">
+        <h2>Rozan Aqila Daris</h2>
+        <p>247006111127</p>
+        <div class="socials">
+          <a href="#">F</a>
+          <a href="#">T</a>
+          <a href="https://www.instagram.com/asriel.xox/profilecard/?igsh=MTdyNHdkdzB4aWV1YQ==">I</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile 3 -->
+    <div class="profile-card">
+      <img src="Rosyada.jpg" alt="Profile Picture">
+      <div class="info">
+        <h2>Rosyada Adly</h2>
+        <p>247006111169</p>
+        <div class="socials">
+          <a href="#">F</a>
+          <a href="#">T</a>
+          <a href="https://www.instagram.com/rosyadaadly?igsh=MzRlODBiNWFlZA==">I</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile 4 -->
+    <div class="profile-card">
+      <img src="Farrel.jpg" alt="Profile Picture">
+      <div class="info">
+        <h2>Farrel Fernaldy Putra Zaeni</h2>
+        <p>247006111138</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/share/WpNDG3Nqrh2Hb7ZP/">F</a>
+          <a href="#">T</a>
+          <a href="https://www.instagram.com/frnldy.f/profilecard/?igsh=Nnl6MWtxbmhsYWpy">I</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Script to add transition animation -->
+  <script>
+    // Handle navigation links
+    const links = document.querySelectorAll('nav a');
+
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent instant navigation
+        const target = link.href;
+        
+        // Add zoom-out class to body
+        document.body.classList.add('zoom-out');
+        
+        // Wait for animation to complete, then navigate
+        setTimeout(() => {
+          window.location.href = target;
+        }, 1000); // Match animation duration
+      });
+    });
+
+    // Set video volume
+    const video = document.getElementById('background-video');
+    video.volume = 0.3;
+  </script>
+</body>
+</html>
