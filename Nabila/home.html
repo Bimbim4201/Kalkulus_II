@@ -1,0 +1,263 @@
+<?php
+session_start();
+if (!isset($_SESSION['email'])) {
+    header("Location: index.php"); // Arahkan ke halaman login jika belum login
+    exit(); 
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fungsi Kita</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="hero">
+        <div id="navbar-container"></div>
+
+        <div class="content">
+            <h1 class="animation">Lets <br> Learn Together</h1>
+            <p class="animation" style="color: #000000;" >Pahami konsep Linear, <br> Selaikan Soal dan Percaya Diri <br> Fungsi Linear <span style="color: #9B1C55;">Tidak lagi </span> Sulit dengan <span style="color: #56019D;">The Functionary</span> </p>
+            <a href="belajar.html" class="btn animation">Mulai Belajar</a>
+        </div>
+        <img src="asset/grafik-fungsi-kuadrat-11.png" class="beranda-img animation">
+    </div>
+
+
+<div class="what" id="tentang">
+    <div class="row mean">
+        <div class="img-col">
+            <video autoplay loop muted playsinline width="90%">
+                <source src="asset/1106(2).mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="text-col">
+            <h2>What is it?</h2>
+            <h5>The Functionary adalah website pembelajaran yang fokus pada materi tentang fungsi linear. </h5>
+            <p>Website ini menyediakan materi tentang fungsi linear dilengkapi deng fitur kuis dan kalkulator. </p>
+            <p>The Functionary memberikan pengalaman belajar yang efesien dan menyeluruh, memungkin teman-teman the functionary untuk menguasai materi secara bertahap dan meningkatkan pemahaman teman-teman tentang fungsi linear.</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+    <div class="service">
+        <div class="conten-box">
+            <div class="container">
+                <h1 class="ourservice">Our Service</h1>
+                <div class="row services">
+                    <div class="col-md-4 text-center">
+                        <div class="icon">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <h3>Materi Fungsi<span> Linear </span> </h3>
+                        <p>Di The Functionary, teman-teman akan diberikan materi seputar fungsi linear disertai dengan contoh soal untuk memperjelas materi.</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="icon">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <h3>Kalkulator<span> 3 Fungsi </span> </h3>
+                        <p>Fitur Kalkulator ini membantu teman teman untuk menggambar dan menganalisis grafik dari fungsi linear,kuadrat, dan kubik. Fitur ini sangat berguna untuk teman-teman yang ingin memahami bagaimana bentuk grafik suatu fungsi.</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="icon">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <h3> <span> Kuis </span> berbagai Level</h3>
+                        <p>Kuis yang dirancang untuk menguji pemahaman teman-teman terhadap materi fungsi linear.Kuis ini dirancang dengan berbagai level, dari yang termudah hingga tersulit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="step">
+        <h1>Dengan Langkah Mudah</h1>
+        <h6>Fungsi Linear Tidak lagi Sulit dengan The Functionary.</h6>
+        <ul>
+            <li>
+                <img src="asset/bg.png" alt="">
+                <i class="fa fa-check"></i>
+                <p>Kunjungi Website Kami</p>
+
+            </li>
+            <li>
+                <img src="asset/book.png" alt="">
+                <i class="fa fa-check"></i>
+                <p>Pelajari Materinya</p>
+            </li>
+            <li>
+                <img src="asset/quiz.png" alt="">
+                <i class="fa fa-check"></i>
+                <p>Gambar Grafik-nya</p>
+            </li>
+            <li>
+                <img src="asset/otak.png" alt="">
+                <i class="fa fa-check"></i>
+                <p>Kuis Berbagai Level</p>
+            </li>
+            <li>
+                <img src="asset/wni.png" alt="">
+                <i class="fa fa-check"></i>
+                <p>Skor Kuis </p>
+            </li>
+        </ul>
+        <a href="belajar.html" class="btn animation">Mulai Belajar</a>
+    </div>
+
+
+
+    <div class="program">
+        <h1>Program</h1>
+        <div class="logos">
+            <div class="logo-item">
+                <img src="asset/html.png" alt="HTML Logo">
+                <h3>HTML</h3>
+            </div>
+            <div class="logo-item">
+                <img src="asset/css.png" alt="CSS Logo">
+                <h3>CSS</h3>
+            </div>
+            <div class="logo-item">
+                <img src="asset/js.png" alt="JavaScript Logo">
+                <h3>JavaScript</h3>
+            </div>
+            <div class="logo-item">
+                <img src="asset/php.png" alt="PHP Logo">
+                <h3>PHP</h3>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+
+
+
+
+
+
+
+    <div class="container-member">
+        <div class="title-container">
+            <h1 class="memberjudul">Members</h1>
+        </div>
+    
+        <div class="member">
+            <div class="card">
+                <div class="img">
+                    <img src="asset/najmi.jpg" alt="photo">
+                </div>
+                <div class="detail">
+                    <div class="name">Najmi Sabilah Almusfiroh</div>
+                    <div class="npm">247006111125</div>
+                </div>
+                <div class="medsos">
+                    <a href="https://www.instagram.com/thaicangores/profilecard/?igsh=dTQ0ZWllZHN4Z3k1" class="instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span class="username">@thaicangores</span>
+                    </a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="img">
+                    <img src="asset/siti.png" alt="photo">
+                </div>
+                <div class="detail">
+                    <div class="name">Siti Qori'ah Muhafidloh</div>
+                    <div class="npm">247006111141</div>
+                </div>
+                <div class="medsos">
+                    <a href="https://www.instagram.com/qrsrie/profilecard/?igsh=MTZsaXRwaXRlaDBqdg==" class="instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span class="username">@qrs_rie</span>
+                    </a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="img">
+                    <img src="asset/abel.jpg" alt="photo">
+                </div>
+                <div class="detail">
+                    <div class="name">Nabila Rohmatul Aulia</div>
+                    <div class="npm">247006111143</div>
+                </div>
+                <div class="medsos">
+                    <a href="https://www.instagram.com/nabilaara_/profilecard/?igsh=MWw4Z2kxM2k3c2tndQ==" class="instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span class="username">@nabilaara_</span>
+                    </a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="img">
+                    <img src="asset/wardah.jpg" alt="photo">
+                </div>
+                <div class="detail">
+                    <div class="name">Wardah Nurwaffiq</div>
+                    <div class="npm">247006111150</div>
+                </div>
+                <div class="medsos">
+                    <a href="https://www.instagram.com/wrdahhy/profilecard/?igsh=MTZkZTRsemg1NGI5ZQ==" class="instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span class="username">@wrdaah__</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+    <div id="footer-container"></div>
+
+
+   
+    
+
+
+
+
+    <script>
+        fetch('navbar.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+    </script>
+
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+    </script>
+
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

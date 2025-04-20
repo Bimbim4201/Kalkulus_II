@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grafik Fungsi</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #graph {
+            width: 100%;
+            height: 400px;
+            max-width: 600px;
+            margin-top: 30px; 
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+ 
+<body>
+    <div id="navbar-container"></div>
+    <div class="jdl">
+        <h1 class="ourservice">Kalkulator Grafik Fungsi</h1>
+        
+    </div>
+    <div class="kalkulator">
+        <div class="isian">
+            <div class="input-group ">
+                <label class="judul" for="functionType">Pilih Jenis Fungsi:</label>
+                <select id="functionType">
+                    <option value="linear">Linear</option>
+                    <option value="quadratic">Kuadrat</option>
+                    <option value="cubic">Kubik</option>
+                </select>
+            </div>
+                <div class="input-group">
+                    <label for="a">Masukan Koefisien a:</label>
+                    <input type="number" id="a" value="1">
+                </div>
+                <div class="input-group">
+                    <label for="b">Masukan Koefisien b:</label>
+                    <input type="number" id="b" value="0">
+                </div>
+                <div class="input-group">
+                    <label for="c">Masukan Koefisien c:</label>
+                    <input type="number" id="c" value="0">
+                </div>
+                <div class="input-group">
+                    <label for="d">Masukan Koefisien d:</label>
+                    <input type="number" id="d" value="0">
+                </div>
+            <button id="updateGraph">Perbarui Grafik</button>
+        </div>
+        
+
+        <div class="graph-container">
+            <canvas id="graph"></canvas>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <script>
+        let chart;
+
+        function setupChart() {
+            const ctx = document.getElementById('graph').getContext('2d');
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: 'Grafik Fungsi',
+                        borderColor: '#3498db',
+                        backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            title: {
+                                display: true,
+                                text: 'x'
+                            },
+                            min: -20,
+                            max: 20,
+                            ticks: {
+                                stepSize: 5
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            title: {
+                                display: true,
+                                text: 'y'
+                            },
+                            min: -20,
+                            max: 20,
+                            ticks: {
+                                stepSize: 5
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateGraph() {
+            const funcType = document.getElementById('functionType').value;
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value);
+            const c = parseFloat(document.getElementById('c').value);
+            const d = parseFloat(document.getElementById('d').value);
+
+            let dataPoints = [];
+
+            for (let x = -20; x <= 20; x += 0.1) {
+                let y = 0;
+                if (funcType === "linear") {
+                    y = a * x + b;
+                } else if (funcType === "quadratic") {
+                    y = a * Math.pow(x, 2) + b * x + c;
+                } else if (funcType === "cubic") {
+                    y = a * Math.pow(x, 3) + b * Math.pow(x, 2) + c * x + d;
+                }
+                dataPoints.push({ x: x, y: y });
+            }
+
+            chart.data.datasets[0].data = dataPoints;
+            chart.update();
+        }
+
+        // Event listener untuk button update graph
+        document.getElementById('updateGraph').addEventListener('click', updateGraph);
+
+        // Memastikan chart dan grafik diupdate setelah halaman selesai dimuat
+        window.onload = function() {
+            setupChart();
+            updateGraph();
+        };
+    </script>
+
+
+    
+
+
+    
+    <div id="footer-container"></div>
+
+
+
+    <script>
+        fetch('navbar.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+    </script>
+
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+    </script>
+
+</body>
+</html>

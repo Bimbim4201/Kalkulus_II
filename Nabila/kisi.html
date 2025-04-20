@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div id="navbar-container"></div>
+    <div class="belajar-hero">
+        <h2>Let's Learn <span style="color: #56019D;">Together</span></h2>
+        <p>    Sebelum membaca pembahasan soal, sangat disarankan untuk mencoba mengerjakan kuis terlebih dahulu. Hal ini bertujuan agar Anda dapat menguji pemahaman secara mandiri dan merasakan tantangan yang lebih menyenangkan dalam belajar. Dengan begitu, pembahasan soal nantinya akan lebih mudah dipahami karena Anda sudah memiliki gambaran dasar dari soal tersebut.          </p>
+    </div>
+    <div class="pembahasan">
+        <h4>Pembahasan Latihan</h4>
+        <div class="bahas-grid">
+            <div class="bahasan-item">
+                <div class="bahasan-header" onclick="toggleBahasan(this)">
+                    Pembahasan Nomor 1
+                </div>
+                <div class="bahasan-body">
+                    Jika gradien suatu fungsi linear adalah 555, maka bagaimana posisi grafiknya? <br><br>
+                    Jawaban: (B) Miring ke kanan                     <br><br>
+                    Gradien lebih dari 0, sehingga grafik terus bergerak lurus ke arah kuadran 1 hingga tak terbatas yang mana ini miring ke arah kanan.
+                </div>
+            </div>
+    
+            <div class="bahasan-item">
+                <div class="bahasan-header" onclick="toggleBahasan(this)">
+                    Pembahasan Nomor 2
+                </div>
+                <div class="bahasan-body">
+                    Fungsi 2x+5=7y akan memotong sumbu y pada titik koordinat? <br><br>
+                    Jawaban: (C) (0, 5/7)                    <br><br>
+                    2x+5=7y <br>
+                    → isolasi y → 2x/7 + 5/7 = 7y/7 → 2x + 5/7 = y <br>
+                    → substitusi x=0 → 2(0)+ 5/7 = y → 5/7 = y → (x, y)=(0, 5/7)
+                </div>
+            </div>
+
+            <div class="bahasan-item">
+                <div class="bahasan-header" onclick="toggleBahasan(this)">
+                    Pembahasan Nomor 3
+                </div>
+                <div class="bahasan-body">
+                    Diketahui fungsi linear 5x+5y=-5y. Jika y=0, berapakah nilai x? <br><br>
+                    Jawaban: (A) 0<br><br>
+                    5x+5y=-5y <br> 
+                    →y=0→5x+5(0)=-5(0) →5x=0 →5(0)=0 → x=0
+
+                </div>
+            </div>
+
+            <div class="bahasan-item">
+                <div class="bahasan-header" onclick="toggleBahasan(this)">
+                    Pembahasan Nomor 4
+                </div>
+                <div class="bahasan-body">
+                    Tentukan koordinat titik potong sumbu x dari fungsi linear y=3x−9 !<br><br>
+                    Jawaban: (B) (3,0) <br><br>
+                    0=y → 0=3x-9 →9=3x →3=x →(x,y)=(3,0)                
+                </div>
+            </div>
+
+            <div class="bahasan-item">
+                <div class="bahasan-header" onclick="toggleBahasan(this)">
+                    Pembahasan Nomor 5
+                </div>
+                <div class="bahasan-body">
+                    Bentuk fungsi linear f(x) adalah 5x+b, diketahui f(3)=20. Berapakah nilai b? <br><br>
+                    Jawaban: (C)(3,0) <br><br>
+                    Pertama kita substitusi x=3 →f(3) → 5(3)+b=20 → 15+b=20 <br>
+                    → isolasi variabel b → b=5.
+                </div>
+            </div>
+    
+            <div class="bahasan-item">
+                <div class="bahasan-header" onclick="toggleBahasan(this)">
+                    Pembahasan Nomor 6
+                </div>
+                <div class="bahasan-body">
+                    Diketahui domain dan range dari fungsi linear f(x) sebagai berikut: <br>
+                    f(1)=7 <br>
+                    f(2)=9 <br>
+                    f(3)=11 <br>
+
+                    Fungsi f(x) adalah?
+                    <br> <br>
+                    Jawaban: (A) f(x)=2x+5                   <br> <br>
+                    Pertama kita cari gradiennya terlebih dahulu dengan cara mencari selisih antara 2 titik koordinat dengan pembilang selisih koordinat y dan penyebut selisih koordinat x <br> 
+                    →Di sini kita pilih titik koordinat (1, 7) dan (2, 9) <br>
+                    →(9-7)/(2-1) →2/1 →gradiennya adalah 2→ f(x)=2x+b <br> 
+                    →Sekarang kita cari nilai b dengan cara mensubstitusi, <br>
+                    di sini kita pilih substitusi x=1 →f(1)=2(1)+b →2(1)+b=7 →b=5 →f(x) adalah 2x+5 
+                </div>
+            </div>
+
+            <div class="bahasan-item">
+                <div class="bahasan-header" onclick="toggleBahasan(this)">
+                    Pembahasan Nomor 7
+                </div>
+                <div class="bahasan-body">
+                    Diberikan persamaan 4x+2y−6=0. Berapakah gradien dari persamaan tersebut? <br><br>
+                    Jawaban: (A) -2 <br><br>
+                    Pertama, kita jadikan bentuk y=mx+b terlebih dahulu →2y=-4x+6 <br>
+                    kemudian, kita hilangkan koefisien pada variabel y dengan cara membagi ruas kanan dan ruas kiri dengan angka 2 <br>
+                    → y=-2x+3 → gradien adalah koefisien dari x, yaitu -2
+                </div>
+            </div>
+
+            <div class="bahasan-item">
+                <div class="bahasan-header" onclick="toggleBahasan(this)">
+                    Pembahasan Nomor 8
+                </div>
+                <div class="bahasan-body">
+                    Sebuah garis memiliki gradien −1/3 dan melalui titik (3,2). Tentukan persamaan garisnya! <br><br>
+                    Jawaban: (A) y=(-1/3)x +3                    <br><br>
+                    Pertama, kita substitusi gradien pada persamaan y=mx+b → y=(-1/3)x + b <br>
+                    Kemudian, substitusi x=3  dan y=2→2=(-1/3)(3) + b <br>
+                    → isolasi variabel b → 3=b →sehingga didapat y=mx+b adalah y=(-1/3)x+3.
+                </div>
+            </div>
+
+            <div class="bahasan-item">
+                <div class="bahasan-header" onclick="toggleBahasan(this)">
+                    Pembahasan Nomor 9
+                </div>
+                <div class="bahasan-body">
+                    Diketahui suatu fungsi linear 5+2(x-1)=70y, berapakah nilai y? <br><br>
+                    Jawaban: (C) y=(√(81(3+2x)^2))/(630) <br><br>
+                    5+2(x-1)=70y → isolasi y untuk mengetahui nilai y <br>
+                    →(5+2(x-1))/70 =y atau (3+2x)/70 =y <br> 
+                    →pilihan C cocok y=(√(81(3+2x)^2)/630 →y=(9(3+2x))/((9)(70)) →y=(3+2x)/70)
+                </div>
+            </div>
+    
+            <div class="bahasan-item">
+                <div class="bahasan-header" onclick="toggleBahasan(this)">
+                    Pembahasan Nomor 10
+                </div>
+                <div class="bahasan-body">
+                    Budi memiliki satu pack kertas HVS bermerek SADU yang mana berisi 500 lembar kertas HVS, ia membelinya dengan harga 46.500 rupiah. <br>
+                    Jika Budi berniat menjualnya secara eceran 500 rupiah mendapat 2 lembar kertas HVS. Dan jika membeli 10 lembar kertas HVS maka akan mendapatkan 1 kertas folio bergaris secara gratis dan berlaku untuk kelipatannya. <br> <br>
+                    Budi harus menjual berapa lembar kertas HVS jika ia berniat menghasilkan keuntungan sebesar 50.000 rupiah? <br><br>
+                    Jawaban: (C) 386 <br><br>
+                    Pertama, kita modelkan permasalahan di atas terlebih dahulu → 50.000=250x - 46.500 <br>
+                    →isolasi x untuk mengetahui jumlah lembar HVS → 386=x <br>
+                    Jadi, lembar kertas HVS yang harus Budi jual adalah sebanyak 386 lembar untuk mendapatkan keuntungan sebesar 50.000 rupiah
+                </div>
+            </div>
+
+            <div class="bahasan-item">
+                <div class="bahasan-header" onclick="toggleBahasan(this)">
+                    Pembahasan Nomor 11
+                </div>
+                <div class="bahasan-body">
+                    Budi memiliki satu pack kertas HVS bermerek SADU yang mana berisi 500 lembar kertas HVS, ia membelinya dengan harga 46.500 rupiah. <br>
+                    Jika Budi berniat menjualnya secara eceran 500 rupiah mendapat 2 lembar kertas HVS. Dan jika membeli 10 lembar kertas HVS maka akan mendapatkan 1 kertas folio bergaris secara gratis dan berlaku untuk kelipatannya. <br> <br>
+                    Jika ia berniat memberikan 200 kertas folio bergaris secara gratis, berapa minimal pack lagi kertas HVS bermerek SADU yang harus ia beli?<br><br>
+                    Jawaban: (B) 18/6 <br><br>
+                    Pertama, kita modelkan permasalahan di atas terlebih dahulu →200(10)=x+500 <br>
+                    →isolasi x untuk mengetahui jumlah lembar HVS →1.500=x →1 pack HVS berisi 500 lembar. <br>
+                    Jadi, untuk mendapatkan 2.000 lembar kita memerlukan 4 pack kertas HVS. <br>
+                    Karena kita sudah memiliki 1 pack kertas HVS maka kita hanya memerlukan 3 pack kertas HVS lagi →18/6 → 3
+                </div>
+            </div>
+
+            <div class="bahasan-item">
+                <div class="bahasan-header" onclick="toggleBahasan(this)">
+                    Pembahasan Nomor 12
+                </div>
+                <div class="bahasan-body">
+                    Budi memiliki utang sebesar 50.000.000 rupiah, gaji Budi perbulan adalah 5 juta rupiah. <br>
+                     Jika dalam 12 bulan utangnya harus lunas, berapakah nominal yang dapat Budi gunakan dalam periode 12 bulan tersebut, di luar biaya membayar utang?<br><br>
+                    Jawaban: (C) ((5.000.000 - (50.000.000/12))12) rupiah                    <br><br>
+                    Gaji Budi per bulan 5.000.000 rupiah dan dia harus membayar utang perbulan selama 12 bulan sebesar 50.000.000/12. <br>
+                    Berarti nominal gaji Budi perbulan dikurang dengan nominal bayar utang menjadi 5.000.000 - (50.000.000/12), <br>
+                    lalu nominal ini kita kali 12 karena soal menyuruh untuk mencari dalam periode 12 bulan. → Didapatkan nominal (5.000.000 - (50.000.000/12))12 rupiah
+                </div>
+            </div>
+
+            <div class="bahasan-item">
+                <div class="bahasan-header" onclick="toggleBahasan(this)">
+                    Pembahasan Nomor 13
+                </div>
+                <div class="bahasan-body">
+                    Sebuah perusahaan produksi memiliki biaya tetap sebesar 500.000 rupiah. <br>
+                    Setiap produk yang dibuat memiliki biaya variabel sebesar 25.000 rupiah. <br>
+                    Jika produk dijual dengan harga 50.000 rupiah per unit, berapa jumlah unit minimal yang harus diproduksi dan dijual agar perusahaan tidak mengalami kerugian? <br><br>
+                    Jawaban: (B) 20 Unit<br><br>
+                    Pertama, kita modelkan permasalahan di atas terlebih dahulu <br>
+                    x adalah variabel untuk unit/produk→ 50.000x=25.000x+500.000 <br>
+                    → isolasi x untuk mengetahui jumlah unit → x=20 <br>
+                    →ketika perusahaan memproduksi 20 unit, <br>
+                    maka perusahaan tersebut tidak mengalami kerugian karena 20 adalah kondisi di mana pendapatan sama dengan pengeluaran, <br>
+                     dan kondisi inilah yang disebut jumlah unit minimal.
+                </div>
+            </div>
+    
+            <div class="bahasan-item">
+                <div class="bahasan-header" onclick="toggleBahasan(this)">
+                    Pembahasan Nomor 14
+                </div>
+                <div class="bahasan-body">
+                    Budi memiliki utang sebesar 50.000.000 rupiah, gaji Budi perbulan adalah 5 juta rupiah. <br>
+                    Jika dalam 12 bulan utangnya harus lunas, berapakah nominal utang yang harus Budi bayarkan perbulannya? <br><br>
+                    Jawaban: (A) (50.000.000/12) rupiah<br><br>
+                    Jumlah utang dibagi 12 bulan →50.000.000/12 <br>
+                     Perbulannya Budi harus membayar 50.000.000/12 rupiah jika dalam 12 bulan utangnya harus lunas
+                </div>
+            </div>
+
+            <div class="bahasan-item">
+                <div class="bahasan-header" onclick="toggleBahasan(this)">
+                    Pembahasan Nomor 15
+                </div>
+                <div class="bahasan-body">
+                    Sebuah perusahaan produksi memiliki biaya tetap sebesar 500.000 rupiah. <br>
+                    Setiap produk yang dibuat memiliki biaya variabel sebesar 25.000 rupiah. <br>
+                    Jika produk dijual dengan harga 50.010 rupiah per unit, berapa jumlah unit yang harus dijual sehingga mengalami keuntungan sebesar 300.000 rupiah? <br><br>
+                    Jawaban: (B) 32 Unit<br><br>
+                    Pertama, kita modelkan permasalahan di atas terlebih dahulu <br>
+                    →300.000=(50.010 - 25.000)x - 500.000 <br>
+                    → isolasi x untuk mendapatkan jumlah unit →800.000=25.010x <br>
+                    → sekitar 31.99=x <br>
+                    →Karena hitungannya per unit, maka kita bulatkan menjadi 32
+                </div>
+            </div>
+
+    
+        </div>
+    </div>
+    
+    
+    
+
+
+
+
+    
+    <div id="footer-container"></div>
+
+
+    <script>
+        fetch('navbar.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+    </script>
+
+    <script>
+        function toggleBahasan(element) {
+            const body = element.nextElementSibling; // Elemen .bahasan-body
+            if (body.style.display === "none" || body.style.display === "") {
+                body.style.display = "block";
+            } else {
+                body.style.display = "none";
+            }
+        }
+    </script>
+
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
