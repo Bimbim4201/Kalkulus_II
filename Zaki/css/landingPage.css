@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.brand {
+    font-family: "Raleway", sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 1.3rem;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.nav-link {
+    font-family: "Roboto", sans-serif;
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.hero-logo {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hero-slogan {
+    font-size: 24px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background-color: #212529;
+    border-color: #212529;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #333;
+}
+
+.carousel-caption h5 {
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.carousel-caption p {
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.btn-card {
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    flex-grow: 1;
+}
+
+.card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.card-img-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card:hover .overlay {
+    opacity: 1;
+}
+
+.card-img-top {
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #212529;
+    color: #fff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer a {
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #c0d9d9 !important;
+}
+
+.footer hr {
+    margin: 1rem 0;
+    border-top: 2px solid #ecf0f1;
+}
+
+.footer .bi {
+    transition: transform 0.3s ease;
+}
+
+.footer .bi:hover {
+    transform: scale(1.2);
+    color: #c0d9d9 !important;
+}
+
+.kafka {
+    color: #ffffff !important;
+}
+
+.math {
+    color: #c0d9d9 !important;
+}
+
+@media (min-width: 992px) {
+    .icons {
+        display: none;
+    }
+
+    .nav-link {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-left: 0.9rem;
+        margin-right: 0.9rem;
+    }
+
+    .brand {
+        font-family: "Raleway", sans-serif;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .btn-card {
+        width: 100%;
+    }
+}
