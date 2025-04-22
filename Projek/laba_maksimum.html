@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hitung Laba Maksimum</title>
+</head>
+<body>
+
+  <h2>Kalkulator Laba Maksimum</h2>
+
+  <label>Biaya Tetap (Rp): </label>
+  <input type="number" id="biaya_tetap"><br><br>
+
+  <label>Biaya Variabel per Unit (Rp): </label>
+  <input type="number" id="biaya_per_variabel"><br><br>
+
+  <label>Harga Awal: </label>
+  <input type="number" id="harga_awal"><br><br>
+
+  <label>Penurunan Harga per Unit (Rp): </label>
+  <input type="number" id="penurunan_harga"><br><br>
+
+  <button onclick="prosesHitung()">Hitung</button>
+
+  <h3>Hasil:</h3>
+  <p id="hasil"></p>
+  
+ 
+  <script>
+  function hitungLabaMaksimum(biaya_tetap, biaya_per_variabel, harga_awal, penurunan_harga) {
+    const produksiOptimal = (harga_awal - biaya_per_variabel) / (2 * penurunan_harga);
+    const hargaOptimal = harga_awal - penurunan_harga * produksiOptimal;
+    const labaMaksimum = (hargaOptimal * produksiOptimal) - (biaya_tetap + biaya_per_variabel * produksiOptimal);
+    return {
+      produksiOptimal,
+      hargaOptimal,
+      labaMaksimum
+    };
+  }
+  
+  function prosesHitung() {
+    const biayaTetapInput = document.getElementById("biaya_tetap").value;
+    const biayaVariabelInput = document.getElementById("biaya_per_variabel").value;
+    const hargaAwalInput = document.getElementById("harga_awal").value;
+    const penurunanHargaInput = document.getElementById("penurunan_harga").value;
+  
+    const hasil = document.getElementById("hasil");
+    
+    if (
+      biayaTetapInput === "" ||
+      biayaVariabelInput === "" ||
+      hargaAwalInput === "" ||
+      penurunanHargaInput === ""
+    ) {
+      hasil.innerHTML = `<span style="color:red;">Semua kolom harus diisi!</span>`;
+      return;
+    }
+    
+    const biayaTetap = parseFloat(biayaTetapInput);
+    const biayaVariabel = parseFloat(biayaVariabelInput);
+    const hargaAwal = parseFloat(hargaAwalInput);
+    const penurunanHarga = parseFloat(penurunanHargaInput);
+    
+    if (biayaTetap < 0 || hargaAwal < 0) {
+      hasil.innerHTML = `<span style="color:red;">Biaya tetap dan harga awal tidak boleh negatif.</span>`;
+      return;
+    }
+    
+    if (biayaVariabel <= 0) {
+      hasil.innerHTML = `<span style="color:red;">Biaya variabel per unit harus lebih dari 0.</span>`;
+      return;
+    }
+    
+    if (penurunanHarga <= 0) {
+      hasil.innerHTML = `<span style="color:red;">Penurunan harga per unit harus lebih dari 0.</span>`;
+      return;
+    }
+    
+    if (hargaAwal < biayaVariabel) {
+      hasil.innerHTML = `<span style="color:red;">Harga awal harus lebih besar atau sama dengan biaya variabel per unit.</span>`;
+      return;
+    }
+
+    const produksiUji = (hargaAwal - biayaVariabel) / (2 * penurunanHarga);
+    const hargaOptimalUji = hargaAwal - penurunanHarga * produksiUji;
+    
+    if (hargaOptimalUji < 0) {
+      hasil.innerHTML = `<span style="color:red;">
+        Kombinasi input menyebabkan harga optimal menjadi negatif.<br>
+        Harap sesuaikan harga awal atau penurunan harga per unit .
+        </span>`;
+        return;
+    }
+    
+    const hasilPerhitungan = hitungLabaMaksimum(biayaTetap, biayaVariabel, hargaAwal, penurunanHarga);
+    const labelLabaRugi = hasilPerhitungan.labaMaksimum >= 0 ? "Laba Maksimum" : "Rugi Minimum";
+  
+    hasil.innerHTML = `
+    Produksi Optimal: ${Math.floor(hasilPerhitungan.produksiOptimal).toLocaleString()} unit<br>
+    Harga Optimal: Rp ${Math.floor(hasilPerhitungan.hargaOptimal).toLocaleString()}<br>
+    ${labelLabaRugi}: Rp ${Math.floor(hasilPerhitungan.labaMaksimum).toLocaleString()}
+    `;
+  }
+  </script>
+  </body>
+  </html>

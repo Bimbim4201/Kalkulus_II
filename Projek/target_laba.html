@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Hitung Target Laba</title>
+</head>
+<body>
+  <h2>Kalkulator Target Laba</h2>
+
+  <label for="biaya">Biaya per Unit (Rp):</label>
+  <input type="number" id="biaya"><br><br>
+
+  <label for="hargaJual">Harga Jual per Unit (Rp):</label>
+  <input type="number" id="hargaJual"><br><br>
+
+  <label for="laba">Laba yang Diinginkan (Rp):</label>
+  <input type="number" id="laba"><br><br>
+
+  <button onclick="hitungJumlahBarang()">Hitung</button>
+
+  <p id="output"></p>
+
+  <script>
+  function hitungJumlahBarang() {
+    const inputBiaya = document.getElementById("biaya").value;
+    const inputHarga = document.getElementById("hargaJual").value;
+    const inputLaba = document.getElementById("laba").value;
+    const output = document.getElementById("output");
+
+    if (inputBiaya === "" || inputHarga === "" || inputLaba === "") {
+      output.innerHTML = `<span style='color:red;'>Semua input wajib diisi!</span>`;
+      return;
+    }
+
+    const biaya = parseFloat(inputBiaya);
+    const hargaJual = parseFloat(inputHarga);
+    const laba = parseFloat(inputLaba);
+    
+    if (laba <= 0 || hargaJual <= 0 || biaya <= 0) {
+      document.getElementById("output").innerHTML = `<span style='color:red;'>Semua input harus lebih dari 0!</span>`;
+      return;
+    }
+    
+    if (hargaJual <= biaya) {
+      document.getElementById("output").innerHTML = `<span style='color:red;'>Harga jual harus lebih tinggi dari biaya!</span>`;
+      return;
+    }
+    
+    const keuntunganPerUnit = hargaJual - biaya;
+    const jumlahBarang = Math.ceil(laba / keuntunganPerUnit);
+    
+    document.getElementById("output").innerText = 
+    `Untuk mendapatkan laba sebanyak ${laba} rupiah, barang yang harus dijual adalah ${jumlahBarang} unit`;
+  }
+  </script>
+</body>
+</html>
+
