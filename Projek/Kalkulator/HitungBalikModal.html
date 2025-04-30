@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BalikModalin - Kalkulator Balik Modal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px 20px 40px;
+      min-height: 100vh;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+
+    header {
+      box-sizing: border-box;
+      width: 100%;
+      top: 0;
+      left: 0;
+      position: fixed;
+      background: #374151;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+
+    header img {
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    header .menu {
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
+    }
+
+    header .menu a {
+      color: white;
+      text-decoration: none;
+    }
+
+    h1 {
+      margin: 30px 0;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .menu a {
+      position: relative;
+      transition: color 0.3s ease;
+      color: white;
+      text-decoration: none;
+    }
+    
+    .menu a::after {
+      content: "";
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: #c2d7c0; 
+      transition: width 0.3s ease-in-out;
+    }
+    
+    .menu a:hover::after {
+      width: 100%;
+    }
+
+    .main-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .left-panel, .right-panel {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .left-panel {
+      max-width: 300px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .left-panel h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #1e3a8a;
+    }
+    .left-panel:hover,
+    .right-panel .chart-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+    }
+
+    .left-panel,
+    .right-panel .chart-wrapper {
+     transition: all 0.3s ease;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px;
+      border: none;
+      background: #1e3a8a;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #374151;
+    }
+
+    #hasil {
+      background: #e2e8f0;
+      border-radius: 8px;
+      padding: 20px;
+      min-height: 150px;
+      margin-bottom: 10px;
+    }
+
+    .right-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .right-panel h3 {
+      text-align: center;
+      font-size: 16px;
+      color: #1e3a8a;
+      margin-bottom: 10px;
+    }
+
+    .chart-wrapper {
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo"><img src="Foto/Logo.png">BalikModalin</div>
+    <nav class="menu">
+      <a href="LabaMaksimum.html">Laba Maksimum</a>
+      <a href="TargetLaba.html">Target Laba</a>
+      <a href="HitungBalikModal.html">Balik Modal</a>
+      <a href="Kalkulator.html">Kalkulator</a>
+    </nav>
+  </header>
+
+<h1>Cari Tahu Kapan Kamu Balik Modal!</h1>
+
+<div class="main-content">
+  <div class="left-panel">
+    <h2>Hasil:</h2>
+    <div id="hasil">-</div>
+
+    <input type="number" id="biaya_tetap" placeholder="Biaya Tetap (Rp)">
+    <input type="number" id="biaya_per_unit" placeholder="Biaya per Unit (Rp)">
+    <input type="number" id="harga_jual" placeholder="Harga Jual per Unit (Rp)">
+    <button onclick="hitung()">Hitung</button>
+  </div>
+
+  <div class="right-panel">
+    <div class="chart-wrapper">
+      <h3>Visualisasi Input</h3>
+      <canvas id="inputChart"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <h3>Visualisasi Grafik Hitung</h3>
+      <canvas id="grafikHitung"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+  let inputChart, grafikChart;
+
+  function hitung() {
+    const biayaTetap = parseFloat(document.getElementById("biaya_tetap").value);
+    const biayaPerUnit = parseFloat(document.getElementById("biaya_per_unit").value);
+    const hargaJual = parseFloat(document.getElementById("harga_jual").value);
+    const hasilDiv = document.getElementById("hasil");
+
+    if (!biayaTetap || !biayaPerUnit || !hargaJual) {
+      hasilDiv.innerHTML = '<span style="color:red;">Semua kolom harus diisi!</span>';
+      return;
+    }
+
+    const contributionMargin = hargaJual - biayaPerUnit;
+    if (contributionMargin <= 0) {
+      hasilDiv.innerHTML = '<span style="color:red;">Harga jual harus lebih besar dari biaya variabel!</span>';
+      return;
+    }
+
+    const breakEven = Math.ceil(biayaTetap / contributionMargin);
+
+    hasilDiv.innerHTML = `Balik Modal setelah jual <strong>${breakEven}</strong> unit.`;
+
+    updateInputChart(biayaTetap, biayaPerUnit, hargaJual);
+    updateGrafikHitung(biayaTetap, biayaPerUnit, hargaJual, breakEven);
+  }
+
+  function updateInputChart(biayaTetap, biayaPerUnit, hargaJual) {
+    const ctx = document.getElementById('inputChart').getContext('2d');
+    if (inputChart) inputChart.destroy();
+
+    inputChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Biaya per Unit', 'Harga per Unit', 'Biaya Tetap'],
+        datasets: [{
+          label: 'Rp',
+          data: [biayaPerUnit, hargaJual, biayaTetap],
+          backgroundColor: ['#60a5fa', '#34d399', '#f87171']
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  }
+
+  function updateGrafikHitung(biayaTetap, biayaPerUnit, hargaJual, breakEven) {
+    const ctx = document.getElementById('grafikHitung').getContext('2d');
+    if (grafikChart) grafikChart.destroy();
+
+    const dataPoints = Array.from({ length: breakEven + 5 }, (_, i) => i);
+    const revenue = dataPoints.map(x => x * hargaJual);
+    const cost = dataPoints.map(x => biayaTetap + x * biayaPerUnit);
+
+    grafikChart = new Chart(ctx, {
+      type: 'scatter',
+      data: {
+        datasets: [
+          {
+            label: 'Pengeluaran',
+            data: dataPoints.map((x, i) => ({ x: x, y: cost[i] })),
+            borderColor: '#f87171',
+            showLine: true,
+            fill: false,
+            pointRadius: 3
+          },
+          {
+            label: 'Pendapatan',
+            data: dataPoints.map((x, i) => ({ x: x, y: revenue[i] })),
+            borderColor: '#60a5fa',
+            showLine: true,
+            fill: false,
+            pointRadius: 3
+          },
+          {
+            label: 'Break Even',
+            data: [{ x: breakEven, y: biayaTetap + biayaPerUnit * breakEven }],
+            backgroundColor: '#ef4444',
+            borderColor: '#ef4444',
+            pointRadius: 6,
+            type: 'scatter'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' },
+          title: { display: false }
+        },
+        scales: {
+          x: { title: { display: true, text: 'Jumlah Unit' } },
+          y: { title: { display: true, text: 'Rp' } }
+        }
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

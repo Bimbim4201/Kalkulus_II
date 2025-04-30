@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BalikModalin - Laba Maksimum</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9fafb;
+      color: #1f2937;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #374151;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .menu a {
+      position: relative;
+      transition: color 0.3s ease;
+      color: white;
+      text-decoration: none;
+      margin-right: 1rem;
+    }
+    
+    .menu a::after {
+      content: "";
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: #c2d7c0; 
+      transition: width 0.3s ease-in-out;
+    }
+    
+    .menu a:hover::after {
+      width: 100%;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+    }
+
+    .content {
+      display: flex;
+      gap: 2rem;
+      width: 100%;
+      max-width: 1200px;
+      margin-top: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      flex: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .card.form {
+      width: 320px;
+    }
+
+    .card.visual {
+      flex: 1;
+      min-width: 400px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    .form-group input.error {
+      border-color: red;
+      background: #ffe5e5;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      background-color: #2563eb;
+      color: white;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3b82f6;
+    }
+
+    #hasilBox {
+      background-color: #e5e7eb;
+      padding: 1rem;
+      border-radius: 8px;
+      min-height: 150px;
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .chart-area {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .chart-box {
+      flex: 1;
+      min-width: 250px;
+      background: #f3f4f6;
+      border-radius: 8px;
+      padding: 1rem;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .chart-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      text-align: center;
+      border-bottom: 1px solid #d1d5db;
+      width: 100%;
+      padding-bottom: 0.5rem;
+    }
+
+    canvas {
+      max-width: 100%;
+      max-height: 220px;
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .chart-area {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="Foto/Logo.png" alt="Logo">
+      BalikModalin
+    </div>
+    <nav class="menu">
+      <a href="LabaMaksimum.html">Laba Maksimum</a>
+      <a href="TargetLaba.html">Target Laba</a>
+      <a href="HitungBalikModal.html">Balik Modal</a>
+      <a href="Kalkulator.html">Kalkulator</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Dapati Analisis Rancangan Bisnismu Laba atau Rugi!</h1>
+
+    <div class="content">
+      <div class="card form">
+        <div id="hasilBox">Hasil:</div>
+
+        <div class="form-group">
+          <input type="number" id="biaya_tetap" placeholder="Biaya Tetap (Rp)">
+          <input type="number" id="biaya_variabel" placeholder="Biaya per Unit (Rp)">
+          <input type="number" id="harga_awal" placeholder="Harga Jual per Unit (Rp)">
+          <input type="number" id="penurunan_harga" placeholder="Penurunan Harga per Unit (Rp)">
+        </div>
+
+        <button onclick="prosesHitung()">Hitung</button>
+      </div>
+
+      <div class="card visual">
+        <div class="chart-area">
+          <div class="chart-box">
+            <div class="chart-title">Visualisasi Input</div>
+            <canvas id="inputChart"></canvas>
+          </div>
+          <div class="chart-box">
+            <div class="chart-title">Visualisasi Grafik Hitung</div>
+            <canvas id="hasilChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    let inputChart, hasilChart;
+
+    function hitungLabaMaksimum(bt, bv, ha, ph) {
+      const produksiOptimal = (ha - bv) / (2 * ph);
+      const hargaOptimal = ha - ph * produksiOptimal;
+      const labaMaksimum = (hargaOptimal * produksiOptimal) - (bt + bv * produksiOptimal);
+      return { produksiOptimal, hargaOptimal, labaMaksimum };
+    }
+
+    function prosesHitung() {
+      const bt = parseFloat(document.getElementById("biaya_tetap").value);
+      const bv = parseFloat(document.getElementById("biaya_variabel").value);
+      const ha = parseFloat(document.getElementById("harga_awal").value);
+      const ph = parseFloat(document.getElementById("penurunan_harga").value);
+      const hasilBox = document.getElementById("hasilBox");
+
+      if (isNaN(bt) || isNaN(bv) || isNaN(ha) || isNaN(ph)) {
+        hasilBox.innerHTML = '<span style="color:red">Semua kolom harus diisi!</span>';
+        updateInputChart(0, 0, 0, 0);
+        updateHasilChart([], 0, 0, 0, 0);
+        return;
+      }
+
+      const hasil = hitungLabaMaksimum(bt, bv, ha, ph);
+      const label = hasil.labaMaksimum >= 0 ? "Laba Maksimum" : "Rugi Minimum";
+
+      hasilBox.innerHTML = `
+        Produksi Optimal: ${Math.floor(hasil.produksiOptimal).toLocaleString()} unit<br>
+        Harga Optimal: Rp ${Math.floor(hasil.hargaOptimal).toLocaleString()}<br>
+        ${label}: Rp ${Math.floor(hasil.labaMaksimum).toLocaleString()}
+      `;
+
+      updateInputChart(ph, bv, ha, bt);
+      updateHasilChart(bt, bv, ha, ph, hasil.produksiOptimal);
+    }
+
+    function updateInputChart(ph, bv, ha, bt) {
+      const ctx1 = document.getElementById('inputChart').getContext('2d');
+      if (inputChart) inputChart.destroy();
+
+      inputChart = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+          labels: ['Penurunan Harga', 'Biaya per Unit', 'Harga Jual per Unit', 'Biaya Tetap'],
+          datasets: [{
+            label: 'Nilai (Rp)',
+            data: [ph, bv, ha, bt],
+            backgroundColor: '#9ca3af'
+          }]
+        },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+    }
+
+    function updateHasilChart(bt, bv, ha, ph, produksiOptimal) {
+      const ctx2 = document.getElementById('hasilChart').getContext('2d');
+      if (hasilChart) hasilChart.destroy();
+
+      const dataLaba = [];
+      for (let x = 0; x <= produksiOptimal * 2; x += Math.max(1, produksiOptimal / 10)) {
+        const harga = ha - ph * x;
+        const labaTemp = (harga * x) - (bt + bv * x);
+        dataLaba.push({ x: x, y: labaTemp });
+      }
+
+      hasilChart = new Chart(ctx2, {
+        type: 'scatter',
+        data: {
+          datasets: [
+            {
+              label: 'Laba/Rugi',
+              data: dataLaba,
+              showLine: true,
+              borderColor: '#6b7280',
+              backgroundColor: '#6b7280',
+            },
+            {
+              label: 'Puncak',
+              data: [{ x: produksiOptimal, y: dataLaba.find(d => d.x === produksiOptimal)?.y || 0 }],
+              backgroundColor: 'red',
+              pointRadius: 6
+            }
+          ]
+        },
+        options: {
+          scales: {
+            x: { title: { display: true, text: 'Unit' } },
+            y: { title: { display: true, text: 'Laba/Rugi (Rp)' } }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
