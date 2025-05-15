@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BalikModalin - Kalkulator Balik Modal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel ="stylesheet" href="../Style/HitungBalikModal.css" />
+</head>
+<body>
+
+  <header>
+    <div class="logo"><img src="Foto/Logo.png">BalikModalin</div>
+    <nav class="menu">
+      <a href="LabaMaksimum.html">Laba Maksimum</a>
+      <a href="TargetLaba.html">Target Laba</a>
+      <a href="HitungBalikModal.html">Balik Modal</a>
+      <a href="Kalkulator.html">Kalkulator</a>
+    </nav>
+  </header>
+
+<h1>Cari Tahu Kapan Kamu Balik Modal!</h1>
+
+<div class="main-content">
+  <div class="left-panel">
+    <h2>Hasil:</h2>
+    <div id="hasil">-</div>
+
+    <label>Biaya Tetap (Rp) </label>
+    <input type="number" id="biaya_tetap" placeholder="Biaya Tetap (Rp)">
+
+    <label>Biaya per Unit (Rp) </label>
+    <input type="number" id="biaya_per_unit" placeholder="Biaya per Unit (Rp)">
+
+    <label>Harga Jual per Unit (Rp) </label>
+    <input type="number" id="harga_jual" placeholder="Harga Jual per Unit (Rp)">
+    <button onclick="hitung()">Hitung</button>
+  </div>
+
+  <div class="right-panel">
+    <div class="chart-wrapper">
+      <h3>Visualisasi Input</h3>
+      <canvas id="inputChart"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <h3>Visualisasi Grafik Hitung</h3>
+      <canvas id="grafikHitung"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  // revisi 1
+  // Tambah label di semua inputan di atas (di file html)
+  // Tambah copy paste css selector label dan selector input dari file Targetlaba.css (di file css)
+  // revisi 1 selesai
+
+  let inputChart, grafikChart;
+
+  function hitung() {
+    const biayaTetap = parseFloat(document.getElementById("biaya_tetap").value);
+    const biayaPerUnit = parseFloat(document.getElementById("biaya_per_unit").value);
+    const hargaJual = parseFloat(document.getElementById("harga_jual").value);
+    const hasilDiv = document.getElementById("hasil");
+
+    // revisi 2
+    // (Tukar tempat) validator cek input harus lebih dulu, karena kalo langsung cek pake contoh !biayaTetap ketika input '0' outputnya adalah 'semua kolom wajib diisi' yg mana gak nyambung.
+    // Tambah harga jual per unit harus lebih besar dari biaya per unit biar bisa balik modal
+    if (biayaTetap <= 0 || hargaJual <= 0 || biayaPerUnit <= 0) {
+        hasilDiv.innerHTML = `<span style="color:red;">Semua input harus lebih dari 0.</span>`;
+        return;
+      }
+
+    if (!biayaTetap || !biayaPerUnit || !hargaJual) {
+      hasilDiv.innerHTML = '<span style="color:red;">Semua input wajib diisi!</span>';
+      return;
+    }
+
+    if (hargaJual <= biayaPerUnit) {
+        hasilDiv.innerHTML = `<span style="color:red;">Harga Jual per Unit harus lebih besar dari Biaya per Unit agar bisa balik modal</span>`;
+        return;
+      }
+
+    // revisi 2 selesai
+    
+    const contributionMargin = hargaJual - biayaPerUnit;
+    if (contributionMargin <= 0) {
+      hasilDiv.innerHTML = '<span style="color:red;">Harga jual harus lebih besar dari biaya variabel!</span>';
+      return;
+    }
+
+    const breakEven = Math.ceil(biayaTetap / contributionMargin);
+
+    hasilDiv.innerHTML = `Balik Modal setelah jual <strong>${breakEven}</strong> unit.`;
+
+    updateInputChart(biayaTetap, biayaPerUnit, hargaJual);
+    updateGrafikHitung(biayaTetap, biayaPerUnit, hargaJual, breakEven);
+  }
+
+  function updateInputChart(biayaTetap, biayaPerUnit, hargaJual) {
+    const ctx = document.getElementById('inputChart').getContext('2d');
+    if (inputChart) inputChart.destroy();
+
+    inputChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Biaya per Unit', 'Harga per Unit', 'Biaya Tetap'],
+        datasets: [{
+          label: 'Rp',
+          data: [biayaPerUnit, hargaJual, biayaTetap],
+          backgroundColor: ['#60a5fa', '#34d399', '#f87171']
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  }
+
+  function updateGrafikHitung(biayaTetap, biayaPerUnit, hargaJual, breakEven) {
+    const ctx = document.getElementById('grafikHitung').getContext('2d');
+    if (grafikChart) grafikChart.destroy();
+
+    const dataPoints = Array.from({ length: breakEven + 5 }, (_, i) => i);
+    const revenue = dataPoints.map(x => x * hargaJual);
+    const cost = dataPoints.map(x => biayaTetap + x * biayaPerUnit);
+
+    grafikChart = new Chart(ctx, {
+      type: 'scatter',
+      data: {
+        datasets: [
+          {
+            label: 'Pengeluaran',
+            data: dataPoints.map((x, i) => ({ x: x, y: cost[i] })),
+            borderColor: '#f87171',
+            showLine: true,
+            fill: false,
+            pointRadius: 3
+          },
+          {
+            label: 'Pendapatan',
+            data: dataPoints.map((x, i) => ({ x: x, y: revenue[i] })),
+            borderColor: '#60a5fa',
+            showLine: true,
+            fill: false,
+            pointRadius: 3
+          },
+          {
+            label: 'Break Even',
+            data: [{ x: breakEven, y: biayaTetap + biayaPerUnit * breakEven }],
+            backgroundColor: '#ef4444',
+            borderColor: '#ef4444',
+            pointRadius: 6,
+            type: 'scatter'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' },
+          title: { display: false }
+        },
+        scales: {
+          x: { title: { display: true, text: 'Jumlah Unit' } },
+          y: { title: { display: true, text: 'Rp' } }
+        }
+      }
+    });
+  }
+
+  // revisi  3
+  // validator input gk akan bisa simbol -, +, e
+  document.querySelectorAll('input[type=number]').forEach(input => {
+      input.addEventListener('keydown', function(e) {
+        if (e.key === '-' || e.key === '+' || e.key.toLowerCase() === 'e') {
+          e.preventDefault();
+        }
+      });
+    });
+  // revisi 3 selesai
+
+</script>
+
+</body>
+</html>

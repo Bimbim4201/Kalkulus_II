@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hitung Balik Modal</title>
+</head>
+<body>
+
+  <h2>Kalkulator Balik Modal</h2>
+
+  <label>Biaya Tetap (Rp): </label>
+  <input type="number" id="biaya_tetap"><br><br>
+
+  <label>Biaya Variabel per Unit (Rp): </label>
+  <input type="number" id="biaya_per_variabel"><br><br>
+
+  <label>Harga Jual per Unit (Rp): </label>
+  <input type="number" id="harga_jual_per_unit"><br><br>
+
+  <button onclick="prosesHitung()">Hitung</button>
+
+  <h3>Hasil:</h3>
+  <p id="result"></p>
+
+  <script>
+  function hitungBreakEvenPoint(biayaTetap, biayaPerVariabel, hargaJualPerUnit) {
+    const penentuBreakEvenPoint = hargaJualPerUnit - biayaPerVariabel;
+    
+    if (penentuBreakEvenPoint <= 0) {
+      return {
+        error: "Harga jual per unit harus lebih besar dari biaya variabel per unit."
+      };
+    }
+    
+    const jumlahUnitBreakEvenPoint = biayaTetap / penentuBreakEvenPoint;
+    const hasilFinal = Math.ceil(jumlahUnitBreakEvenPoint);
+    return {
+      hasilFinal
+    };
+  }
+  
+  function prosesHitung() {
+    const biayaTetapInput = document.getElementById("biaya_tetap");
+    const biayaPerVariabelInput = document.getElementById("biaya_per_variabel");
+    const hargaJualPerUnitInput = document.getElementById("harga_jual_per_unit");
+    
+    if (
+      biayaTetapInput.value === "" ||
+      biayaPerVariabelInput.value === "" ||
+      hargaJualPerUnitInput.value === ""
+    ) {
+      document.getElementById("result").innerHTML = `<span style="color:red;">Semua kolom harus diisi!</span>`;
+      return;
+    }
+
+    const biayaTetap = parseFloat(biayaTetapInput.value);
+    const biayaPerVariabel = parseFloat(biayaPerVariabelInput.value);
+    const hargaJualPerUnit = parseFloat(hargaJualPerUnitInput.value);
+    
+    if (isNaN(biayaTetap) || isNaN(biayaPerVariabel) || isNaN(hargaJualPerUnit)) {
+      document.getElementById("result").innerHTML = `<span style="color:red;">Harap masukkan angka yang valid untuk semua kolom!</span>`;
+      return;
+    }
+    
+    if (biayaTetap <= 0 || hargaJualPerUnit <= 0) {
+      document.getElementById("result").innerHTML = `<span style="color:red;">Biaya tetap dan harga jual per unit harus lebih besar dari 0!</span>`;
+      return;
+    }
+    
+    if (biayaPerVariabel < 0) {
+      document.getElementById("result").innerHTML = `<span style="color:red;">Biaya variabel per unit tidak boleh kurang dari 0!</span>`;
+      return;
+    }
+    
+    if (hargaJualPerUnit <= biayaPerVariabel) {
+      document.getElementById("result").innerHTML = `<span style="color:red;">Harga jual per unit harus lebih besar dari biaya variabel per unit!</span>`;
+      return;
+    }
+    
+    const hasil = hitungBreakEvenPoint(biayaTetap, biayaPerVariabel, hargaJualPerUnit);
+    
+    if (hasil.error) {
+      document.getElementById("result").innerHTML = `<span style="color:red;">${hasil.error}</span>`;
+    } else {
+       document.getElementById("result").innerHTML = `
+        <strong>Anda balik modal</strong> setelah menjual <strong>${hasil.hasilFinal.toLocaleString()}</strong> unit produk.
+         `;
+        }
+       }
+   </script>
+
+</body>
+</html>

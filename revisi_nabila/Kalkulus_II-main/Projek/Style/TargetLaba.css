@@ -1,0 +1,178 @@
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafb;
+      color: #111827;
+    }
+    header {
+      background-color: #374151;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: white;
+      font-weight: 600;
+      display: flex;
+    }
+    header img {
+      height: 30px;
+      margin-right: 10px;
+    }
+    nav a {
+      color: white;
+      margin-left: 2rem;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .menu a {
+      position: relative;
+      transition: color 0.3s ease;
+      color: white;
+      text-decoration: none;
+    }
+    
+    .menu a::after {
+      content: "";
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: #c2d7c0; 
+      transition: width 0.3s ease-in-out;
+    }
+    
+    .menu a:hover::after {
+      width: 100%;
+    }
+
+    .subtext {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 2rem;
+      color: #29303b;
+      font-weight: 500;
+    }
+    main {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+      display: flex;
+      gap: 2rem;
+    }
+    .form-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      flex: 0.9;
+      display: flex;
+      flex-direction: column;
+    }
+    .hasil-box {
+      background: #f3f4f6;
+      border-radius: 10px;
+      padding: 1rem;
+      min-height: 120px;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #374151;
+    }
+    label {
+      font-weight: 600;
+      margin-top: 1.25rem;
+      font-size: 0.95rem;
+      color: #374151;
+    }
+    input[type="number"] {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.8rem;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: #f9fafb;
+    }
+    button {
+      margin-top: 1.75rem;
+      width: 100%;
+      padding: 0.9rem;
+      background-color: #1d4ed8;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #2563eb;
+    }
+    .visualisasi-wrapper {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+      flex: 1.7;
+      display: flex;
+      flex-direction: column;
+    }
+    .form-card:hover, .visualisasi-wrapper:hover {
+      transform: translateY(-5px);
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    .visualisasi {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+    .grafik-card {
+      background: #f3f4f6;
+      padding: 1.2rem;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 260px;
+    }
+    .grafik-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #1f2937;
+      font-weight: 700;
+      text-align: center;
+    }
+    .grafik-card hr {
+      width: 100%;
+      border: 0;
+      height: 1px;
+      background-color: #d1d5db;
+      margin-bottom: 0.8rem;
+    }
+    canvas {
+      max-width: 100%;
+      max-height: 180px;
+    }
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+      }
+      .visualisasi {
+        grid-template-columns: 1fr;
+      }
+    }
