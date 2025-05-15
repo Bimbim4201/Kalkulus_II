@@ -15,6 +15,7 @@
       justify-content: space-between;
       align-items: center;
       color: white;
+      position: relative;
     }
     header h1 {
       font-size: 1.5rem;
@@ -26,34 +27,124 @@
       height: 30px;
       margin-right: 10px;
     }
-    nav a {
-      color: white;
-      margin-left: 2rem;
-      font-weight: 500;
-      text-decoration: none;
-      font-size: 1rem;
-    }
-
-    .menu a {
+    
+    /* Hamburger Menu Styles */
+    .hamburger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
       position: relative;
-      transition: color 0.3s ease;
+      z-index: 20;
+      background-color: #3b4252;
+      border-radius: 50%;
+      transition: background-color 0.3s;
+    }
+    
+    .hamburger:hover {
+      background-color: #4c566a;
+    }
+    
+    .hamburger span {
+      display: block;
+      position: absolute;
+      height: 3px;
+      width: 24px;
+      background: white;
+      border-radius: 3px;
+      opacity: 1;
+      left: 8px;
+      transform: rotate(0deg);
+      transition: .25s ease-in-out;
+    }
+    
+    .hamburger span:nth-child(1) {
+      top: 13px;
+    }
+    
+    .hamburger span:nth-child(2), .hamburger span:nth-child(3) {
+      top: 19px;
+    }
+    
+    .hamburger span:nth-child(4) {
+      top: 25px;
+    }
+    
+    .hamburger.open span:nth-child(1) {
+      top: 10px;
+      width: 0%;
+      left: 50%;
+    }
+    
+    .hamburger.open span:nth-child(2) {
+      transform: rotate(45deg);
+    }
+    
+    .hamburger.open span:nth-child(3) {
+      transform: rotate(-45deg);
+    }
+    
+    .hamburger.open span:nth-child(4) {
+      top: 10px;
+      width: 0%;
+      left: 50%;
+    }
+    
+    /* Navigation Menu */
+    .menu {
+      position: fixed;
+      top: 80px;
+      right: 30px;
+      width: 220px;
+      background-color: #293241;
+      z-index: 10;
+      border-radius: 20px;
+      transform: scale(0);
+      transform-origin: top right;
+      transition: transform 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+    
+    .menu.active {
+      transform: scale(1);
+    }
+    
+    .menu a {
+      display: block;
       color: white;
       text-decoration: none;
+      padding: 15px 25px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: all 0.3s;
+      border-left: 4px solid transparent;
     }
     
-    .menu a::after {
-      content: "";
-      position: absolute;
-      bottom: -3px;
+    .menu a:hover {
+      background-color: #3b4252;
+      border-left: 4px solid #60a5fa;
+      padding-left: 30px;
+    }
+    
+    .menu-overlay {
+      position: fixed;
+      top: 0;
       left: 0;
-      width: 0%;
-      height: 2px;
-      background-color: #c2d7c0; 
-      transition: width 0.3s ease-in-out;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 5;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
     }
     
-    .menu a:hover::after {
-      width: 100%;
+    .menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
     }
 
     .subtext {

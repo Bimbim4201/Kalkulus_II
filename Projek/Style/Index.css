@@ -54,7 +54,7 @@
     .nav-links a::after {
       content: "";
       position: absolute;
-      bottom: 5px;
+      bottom: -6px;
       left: 0;
       width: 0%;
       height: 2px;
@@ -323,3 +323,12 @@
     .theme-toggle:hover {
       background-color: #222;
     }
+
+      .page-transition {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      }
+
+      .page-transition.active {
+      opacity: 1;
+      }
