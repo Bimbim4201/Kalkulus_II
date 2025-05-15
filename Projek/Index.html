@@ -7,17 +7,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="Style/Index.css" />
 </head>
-<body>
+<body class="page-transition">
+
   <header class="navbar">
     <div class="left" style="display: flex; align-items: center; gap: 0.5rem;">
-      <img src="Foto/Logo.jpg" alt="Logo BalikModalin" style="width: 40px; height: 40px; border-radius: 50%;">
+      <a href="Index.html">
+        <img src="Foto/Logo.jpg" alt="Logo BalikModalin" style="width: 40px; height: 40px; border-radius: 50%;">
+      </a>
       <div class="logo">BalikModalin</div>
     </div>
     <nav class="nav-links">
       <a href="Index.html"><i class="fas fa-home"></i> Beranda</a>
       <a href="Informasi.html"><i class="fas fa-info-circle"></i> Informasi</a>
       <a href="Kalkulator.html"><i class="fas fa-calculator"></i> Kalkulator</a>
-      <button class="theme-toggle" onclick="toggleTheme()">🌙/☀️</button>
     </nav>
   </header>
 
@@ -126,6 +128,35 @@
       const currentTheme = html.getAttribute("data-theme");
       html.setAttribute("data-theme", currentTheme === "dark" ? "light" : "dark");
     }
+    document.addEventListener("DOMContentLoaded", () => {
+    const body = document.body;
+    body.classList.add("page-transition");
+
+    setTimeout(() => {
+      body.classList.add("active");
+    }, 10);
+
+    // Saat klik link internal
+    document.querySelectorAll("a[href]").forEach(link => {
+      const url = new URL(link.href);
+
+      // Cek link internal dan bukan target _blank
+      if (url.hostname === location.hostname && !link.hasAttribute("target")) {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          const href = this.getAttribute("href");
+
+          // Tambahkan efek fade-out
+          document.body.classList.remove("active");
+
+          // Setelah transisi selesai, redirect
+          setTimeout(() => {
+            window.location.href = href;
+          }, 300);
+        });
+      }
+    });
+  });
   </script>
 </body>
 </html>

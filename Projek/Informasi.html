@@ -5,637 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BalikModalin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        /* === GLOBAL STYLES === */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: #fcf8ee;
-            color: #1a2e3b;
-            line-height: 1.6;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            margin-bottom: 0.5rem;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* === NAVBAR === */
-        .navbar {
-            background-color: #183B4E;
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: white;
-            position: relative;
-            flex-wrap: wrap;
-        }
-
-        .navbar .left {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .navbar .logo {
-            font-family: Georgia, serif;
-            font-size: 1.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            position: relative;
-            transition: color 0.3s ease;
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 0;
-        }
-
-        .nav-links a::after {
-            content: "";
-            position: absolute;
-            bottom: 0px;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background-color: #c2d7c0;
-            transition: width 0.3s ease-in-out;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .menu-toggle {
-            display: none;
-            cursor: pointer;
-            font-size: 1.5rem;
-        }
-
-        /* === HERO SECTION === */
-        .hero {
-            background-color: #d79c3f;
-            text-align: center;
-            padding: 3rem 1rem;
-        }
-        
-        .hero h2 {
-            margin-bottom: 1rem;
-            font-size: 2rem;
-        }
-        
-        .hero p {
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1rem;
-        }
-        
-        /* === FEATURES === */
-        .features {
-            text-align: center;
-            padding: 3rem 1rem;
-        }
-
-        .features h2 {
-            margin-bottom: 2rem;
-            font-size: 1.8rem;
-        }
-        
-        /* === TIMELINE === */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 1rem 0;
-        }
-        
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background-color: #03314b;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -2px;
-        }
-        
-        .timeline-item {
-            padding: 1rem;
-            position: relative;
-            background-color: #fff7e2;
-            border-radius: 8px;
-            width: 45%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin: 2rem 0;
-        }
-        
-        .timeline-item.left {
-            left: 0;
-        }
-        
-        .timeline-item.right {
-            left: 55%;
-        }
-        
-        .timeline-item::before {
-            content: attr(data-step);
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: #03314b;
-            color: #fff;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 40px;
-            font-weight: bold;
-            z-index: 1;
-        }
-        
-        .timeline-item.left::before {
-            right: -60px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        
-        .timeline-item.right::before {
-            left: -60px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        
-        /* === SUMMARY === */
-        .summary {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 3rem;
-            flex-wrap: wrap;
-        }
-        
-        .summary div {
-            background: #fff7e2;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            font-size: 1.2rem;
-            font-weight: bold;
-            min-width: 180px;
-            text-align: center;
-        }
-        
-        /* === HOW IT WORKS === */
-        .how-it-works {
-            background-color: #d79c3f;
-            padding: 3rem 1rem;
-            text-align: center;
-        }
-        
-        .how-it-works h2 {
-            margin: 0 0 1rem;
-            font-size: 2rem;
-        }
-        
-        .how-it-works p {
-            font-size: 1rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        /* === STEPS === */
-        .steps {
-            background: #fcf8ee;
-            padding: 2rem 1rem;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .step {
-            background: #fff7e2;
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .step::before {
-            content: attr(data-step);
-            background: #03314b;
-            color: #fff;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-        
-        /* === FAQ === */
-        .faq {
-            background: #fff;
-            padding: 3rem 1rem;
-            text-align: center;
-        }
-        
-        .faq h2 {
-            margin-bottom: 2rem;
-            font-size: 1.8rem;
-        }
-        
-        .faq-item {
-            background: #fcf8ee;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-            max-width: 800px;
-            margin: 1rem auto;
-            text-align: left;
-            position: relative;
-        }
-
-        .faq-question {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
-        }
-        
-        .faq-toggle {
-            transition: transform 0.3s ease;
-        }
-        
-        .faq-item.active .faq-toggle {
-            transform: rotate(180deg);
-        }
-        
-        .faq-answer {
-            display: none;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #ddd;
-        }
-        
-        .faq-item.active .faq-answer {
-            display: block;
-        }
-        
-        /* === TEAM === */
-        .tim-balikmodalin {
-            background-color: #DDA853;
-            padding: 3rem 1rem;
-            text-align: center;
-            color: #183B4E;
-        }
-        
-        .timbalikmodalin {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .tim-balikmodalin p {
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .team {
-            background: #fff7e2;
-            text-align: center;
-            padding: 3rem 1rem;
-            color: #27548A;
-        }
-        
-        .team-members {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .member {
-            border-radius: 10px;
-            padding: 1.5rem;
-            width: 250px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            background-color: #fff;
-            transition: all 0.3s ease;
-        }
-        
-        .member:hover {
-           transform: translateY(-8px);
-           background-color: #f7eac6;
-           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .member img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        
-        .member:hover img {
-            transform: scale(1.05);
-        }
-        
-        .member h3 {
-            margin: 0.5rem 0 0.2rem;
-            font-size: 1.1rem;
-        }
-        
-        .member h4 {
-            margin: 0;
-            font-size: 0.9rem;
-            color: #555;
-        }
-        
-        .member p {
-            margin: 0.5rem 0 0;
-            font-size: 0.9rem;
-            color: #27548A;
-        }
-        
-        /* === FOOTER === */
-        .footer {
-            background-color: #183B4E;
-            color: white;
-            padding: 2rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-        
-        .footer-column {
-            flex: 1;
-            min-width: 250px;
-            padding: 0.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        
-        .footer-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: Georgia, serif;
-            font-size: 1.5rem;
-        }
-        
-        .footer-logo img {
-            height: 40px;
-            width: 40px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-        
-        .footer-content p {
-            margin: 0.3rem 0;
-            font-size: 0.9rem;
-        }
-        
-        .footer-content a {
-            margin: 0.3rem 0;
-            text-decoration: none;
-            color: white;
-            transition: opacity 0.3s ease;
-        }
-        
-        .footer-content a:hover {
-            opacity: 0.8;
-        }
-        
-        .footer-content a i {
-            margin-right: 0.5rem;
-        }
-        
-        .footer-content.sosial-media {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        
-        .footer-content.sosial-media a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            border: 1px solid white;
-            border-radius: 50%;
-            color: white;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .footer-content.sosial-media a:hover {
-            background-color: white;
-            color: #183B4E;
-        }
-        
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #0d2e3f;
-            color: #ccc;
-            padding: 1rem;
-            font-size: 0.9rem;
-            border-top: 2px solid rgba(255,255,255,0.2);
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .footer-bottom a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-bottom a:hover {
-            color: white;
-        }
-
-        /* === MEDIA QUERIES === */
-        @media (min-width: 768px) {
-            .navbar {
-                padding: 1rem 2rem;
-            }
-            
-            .navbar .logo {
-                font-size: 1.8rem;
-            }
-            
-            .hero {
-                padding: 4rem 2rem;
-            }
-            
-            .hero h2 {
-                font-size: 2.2rem;
-            }
-            
-            .features h2 {
-                font-size: 2.2rem;
-            }
-            
-            .how-it-works {
-                padding: 4rem 2rem 2rem;
-            }
-            
-            .how-it-works h2 {
-                font-size: 2.2rem;
-            }
-            
-            .steps {
-                padding: 2rem;
-            }
-            
-            .faq {
-                padding: 4rem 2rem;
-            }
-            
-            .faq h2 {
-                font-size: 2rem;
-            }
-            
-            .timbalikmodalin {
-                font-size: 2.5rem;
-            }
-            
-            .footer {
-                padding: 2rem;
-                gap: 4rem;
-            }
-        }
-        
-        @media (max-width: 767px) {
-            .menu-toggle {
-                display: block;
-                z-index: 1000;
-            }
-            
-            .nav-links {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background-color: #183B4E;
-                flex-direction: column;
-                width: 100%;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease;
-                z-index: 999;
-                border-top: 1px solid rgba(255,255,255,0.1);
-            }
-            
-            .nav-links.active {
-                max-height: 300px;
-            }
-            
-            .nav-links a {
-                width: 100%;
-                padding: 1rem;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-            }
-            
-            .nav-links a::after {
-                display: none;
-            }
-            
-            .timeline::after {
-                left: 30px;
-            }
-            
-            .timeline-item {
-                width: calc(100% - 60px);
-                margin-left: 60px;
-            }
-            
-            .timeline-item.left,
-            .timeline-item.right {
-                left: 0;
-            }
-            
-            .timeline-item.left::before,
-            .timeline-item.right::before {
-                left: -45px;
-                right: auto;
-            }
-            
-            .steps {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .step {
-                flex-direction: column;
-                align-items: flex-start;
-                text-align: left;
-                padding: 1.5rem 1rem;
-            }
-            
-            .step::before {
-                margin-bottom: 1rem;
-            }
-            
-            .member {
-                width: 100%;
-                max-width: 280px;
-            }
-            
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="Style/Informasi.css">
 </head>
 <body>
   <header class="navbar">
-    <div class="left">
-      <img src="Foto/Logo.jpg" alt="Logo BalikModalin" style="width: 40px; height: 40px; border-radius: 50%;">
+    <div class="left" style="display: flex; align-items: center; gap: 0.5rem;">
+      <a href="Index.html">
+        <img src="Foto/Logo.jpg" alt="Logo BalikModalin" style="width: 40px; height: 40px; border-radius: 50%;">
+      </a>
       <div class="logo">BalikModalin</div>
     </div>
     <div class="menu-toggle" id="menuToggle">
@@ -655,20 +32,27 @@
 
   <section class="features">
     <h2>Fitur Kalkulator di BalikModalin</h2>
-    <div class="timeline">
-      <div class="timeline-item left" data-step="01">
-        <h3>Kalkulator Laba Maksimum</h3>
-        <p>Hitung potensi laba maksimum dari modal yang dimiliki</p>
-      </div>
-      <div class="timeline-item right" data-step="02">
-        <h3>Kalkulator Target Laba</h3>
-        <p>Hitung berapa banyak barang yang perlu dijual untuk mencapai target keuntungan tertentu</p>
-      </div>
-      <div class="timeline-item left" data-step="03">
-        <h3>Kalkulator Balik Modal</h3>
-        <p>Ketahui berapa barang yang harus terjual untuk balik modal (impas)</p>
-      </div>
-    </div>
+<div class="timeline">
+  <div class="timeline-item left">
+    <a href="2Laba_Maksimum.html" class="timeline-circle">01</a>
+    <h3>Kalkulator Laba Maksimum</h3>
+    <p>Hitung potensi laba maksimum dari modal yang dimiliki</p>
+  </div>
+
+  <div class="timeline-item right">
+    <a href="3Target_Laba.html" class="timeline-circle">02</a>
+    <h3>Kalkulator Target Laba</h3>
+    <p>Hitung berapa banyak barang yang perlu dijual untuk mencapai target keuntungan tertentu</p>
+  </div>
+
+  <div class="timeline-item left">
+    <a href="1Balik_Modal.Html" class="timeline-circle">03</a>
+    <h3>Kalkulator Balik Modal</h3>
+    <p>Ketahui berapa barang yang harus terjual untuk balik modal (impas)</p>
+  </div>
+</div>
+
+
 
     <div class="summary">
       <div>
@@ -688,23 +72,31 @@
   <section class="steps">
     <div class="step" data-step="1">
       <div>
+        <h3>Pahami pedoman penggunaan</h3>
+        <p>
+          <a href="#" style="color: #000000; text-decoration: none;">link ke halaman glosarium</a>
+        </p>
+      </div>
+    </div>
+    <div class="step" data-step="2">
+      <div>
         <h3>Pilih Kalkulator</h3>
         <p>Sesuaikan dengan kebutuhan</p>
       </div>
     </div>
-    <div class="step" data-step="2">
+    <div class="step" data-step="3">
       <div>
         <h3>Input Data Usaha</h3>
         <p>Pengguna memasukan seluruh inputan berdasarkan kalkulator yang dipilih</p>
       </div>
     </div>
-    <div class="step" data-step="3">
+    <div class="step" data-step="4">
       <div>
         <h3>Klik Hitung</h3>
         <p>Dapatkan hasil langsung tanpa perlu instalasi tambahan</p>
       </div>
     </div>
-    <div class="step" data-step="4">
+    <div class="step" data-step="5">
       <div>
         <h3>Baca Hasil & Insight</h3>
         <p>Nikmati penjelasan hasil secara otomatis dan mudah dimengerti</p>
