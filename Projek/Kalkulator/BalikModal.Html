@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BalikModalin - Kalkulator Balik Modal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="../Style/BalikModal.css">
+</head>
+
+<body>
+  <header>
+    <div class="left" style="display: flex; align-items: center; gap: 0.5rem;">
+      <a href="../Index.html">
+        <img src="../Foto/Logo.jpg" alt="Logo BalikModalin" style="width: 40px; height: 40px; border-radius: 50%;">
+      </a>
+      <div class="logo">BalikModalin</div>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <nav class="menu">
+      <a href="HitungBalikModal.html">Kalkulator Balik Modal</a>
+      <a href="LabaMaksimum.html">Kalkulator Laba Maksimum</a>
+      <a href="TargetLaba.html">Kalkulator Target Laba</a>
+      <a href="Riwayat.html">Riwayat</a>
+    </nav>
+  </header>
+
+<h1>Cari Tahu Kapan Kamu Balik Modal!</h1>
+
+<div class="main-content">
+  <div class="left-panel">
+    <h2>Hasil:</h2>
+    <div id="hasil">-</div>
+
+    <input type="number" id="biaya_tetap" placeholder="Biaya Tetap (Rp)">
+    <input type="number" id="biaya_per_unit" placeholder="Biaya per Unit (Rp)">
+    <input type="number" id="harga_jual" placeholder="Harga Jual per Unit (Rp)">
+    <button onclick="hitung()">Hitung</button>
+  </div>
+
+  <div class="right-panel">
+    <div class="chart-wrapper">
+      <h3>Visualisasi Input</h3>
+      <canvas id="inputChart"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <h3>Visualisasi Grafik Hitung</h3>
+      <canvas id="grafikHitung"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+  let inputChart, grafikChart;
+
+  function toggleMenu() {
+    document.querySelector('.hamburger').classList.toggle('active');
+    const menu = document.querySelector('.menu');
+    menu.classList.toggle('active');
+    
+    // Add animation when opening
+    if (menu.classList.contains('active')) {
+      menu.style.display = 'block';
+      setTimeout(() => {
+        menu.style.opacity = '1';
+        menu.style.transform = 'scale(1)';
+      }, 10);
+    } else {
+      menu.style.opacity = '0';
+      menu.style.transform = 'scale(0.9)';
+      setTimeout(() => {
+        if (!menu.classList.contains('active')) {
+          menu.style.display = 'none';
+        }
+      }, 300);
+    }
+  }
+
+  // Initialize menu as hidden
+  document.addEventListener('DOMContentLoaded', function() {
+    const menu = document.querySelector('.menu');
+    menu.style.display = 'none';
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const menu = document.querySelector('.menu');
+    const hamburger = document.querySelector('.hamburger');
+    
+    if (!menu.contains(event.target) && !hamburger.contains(event.target) && menu.classList.contains('active')) {
+      toggleMenu();
+    }
+  });
+
+  function hitung() {
+    const biayaTetap = parseFloat(document.getElementById("biaya_tetap").value);
+    const biayaPerUnit = parseFloat(document.getElementById("biaya_per_unit").value);
+    const hargaJual = parseFloat(document.getElementById("harga_jual").value);
+    const hasilDiv = document.getElementById("hasil");
+
+    if (!biayaTetap || !biayaPerUnit || !hargaJual) {
+      hasilDiv.innerHTML = '<span style="color:red;">Semua kolom harus diisi!</span>';
+      return;
+    }
+
+    const contributionMargin = hargaJual - biayaPerUnit;
+    if (contributionMargin <= 0) {
+      hasilDiv.innerHTML = '<span style="color:red;">Harga jual harus lebih besar dari biaya variabel!</span>';
+      return;
+    }
+
+    const breakEven = Math.ceil(biayaTetap / contributionMargin);
+
+    hasilDiv.innerHTML = `Balik Modal setelah jual <strong>${breakEven}</strong> unit.`;
+
+    updateInputChart(biayaTetap, biayaPerUnit, hargaJual);
+    updateGrafikHitung(biayaTetap, biayaPerUnit, hargaJual, breakEven);
+  }
+
+  function updateInputChart(biayaTetap, biayaPerUnit, hargaJual) {
+    const ctx = document.getElementById('inputChart').getContext('2d');
+    if (inputChart) inputChart.destroy();
+
+    inputChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Biaya per Unit', 'Harga per Unit', 'Biaya Tetap'],
+        datasets: [{
+          label: 'Rp',
+          data: [biayaPerUnit, hargaJual, biayaTetap],
+          backgroundColor: ['#60a5fa', '#34d399', '#f87171']
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  }
+
+  function updateGrafikHitung(biayaTetap, biayaPerUnit, hargaJual, breakEven) {
+    const ctx = document.getElementById('grafikHitung').getContext('2d');
+    if (grafikChart) grafikChart.destroy();
+
+    const dataPoints = Array.from({ length: breakEven + 5 }, (_, i) => i);
+    const revenue = dataPoints.map(x => x * hargaJual);
+    const cost = dataPoints.map(x => biayaTetap + x * biayaPerUnit);
+
+    grafikChart = new Chart(ctx, {
+      type: 'scatter',
+      data: {
+        datasets: [
+          {
+            label: 'Pengeluaran',
+            data: dataPoints.map((x, i) => ({ x: x, y: cost[i] })),
+            borderColor: '#f87171',
+            showLine: true,
+            fill: false,
+            pointRadius: 3
+          },
+          {
+            label: 'Pendapatan',
+            data: dataPoints.map((x, i) => ({ x: x, y: revenue[i] })),
+            borderColor: '#60a5fa',
+            showLine: true,
+            fill: false,
+            pointRadius: 3
+          },
+          {
+            label: 'Break Even',
+            data: [{ x: breakEven, y: biayaTetap + biayaPerUnit * breakEven }],
+            backgroundColor: '#ef4444',
+            borderColor: '#ef4444',
+            pointRadius: 6,
+            type: 'scatter'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' },
+          title: { display: false }
+        },
+        scales: {
+          x: { title: { display: true, text: 'Jumlah Unit' } },
+          y: { title: { display: true, text: 'Rp' } }
+        }
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

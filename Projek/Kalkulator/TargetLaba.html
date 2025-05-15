@@ -8,17 +8,32 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="../Style/TargetLaba.css">
 </head>
+
 <body>
 
 <header>
-  <h1><img src="Foto/Logo.png">BalikModalin</h1>
-  <nav class="menu">
-    <a href="LabaMaksimum.html">Laba Maksimum</a>
-    <a href="TargetLaba.html">Target Laba</a>
-    <a href="HitungBalikModal.html">Balik Modal</a>
-    <a href="Kalkulator.html">Kalkulator</a>
-  </nav>
+    <div class="left" style="display: flex; align-items: center; gap: 0.5rem;">
+      <a href="../Index.html">
+        <img src="../Foto/Logo.jpg" alt="Logo BalikModalin" style="width: 40px; height: 40px; border-radius: 50%;">
+      </a>
+      <h1 class="logo">BalikModalin</h1>
+    </div>
+  <div class="hamburger" id="hamburger-button">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </header>
+
+<div class="menu" id="mobile-menu">
+  <a href="HitungBalikModal.html">Balik Modal</a>
+  <a href="LabaMaksimum.html">Laba Maksimum</a>
+  <a href="TargetLaba.html">Target Laba</a>
+  <a href="Riwayat.html">Riwayat</a>
+</div>
+
+<div class="menu-overlay" id="menu-overlay"></div>
 
 <div class="subtext">
   Hitung Laba sebanyak yang kamu mau
@@ -59,6 +74,36 @@
 </main>
 
 <script>
+  // Menu Hamburger Functionality
+  const hamburger = document.getElementById('hamburger-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuOverlay = document.getElementById('menu-overlay');
+  let isMenuOpen = false;
+  
+  hamburger.addEventListener('click', function(e) {
+    e.stopPropagation();
+    this.classList.toggle('open');
+    mobileMenu.classList.toggle('active');
+    menuOverlay.classList.toggle('active');
+    isMenuOpen = !isMenuOpen;
+  });
+  
+  document.addEventListener('click', function(e) {
+    if (isMenuOpen && !mobileMenu.contains(e.target) && e.target !== hamburger) {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('active');
+      menuOverlay.classList.remove('active');
+      isMenuOpen = false;
+    }
+  });
+  
+  menuOverlay.addEventListener('click', function() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('active');
+    menuOverlay.classList.remove('active');
+    isMenuOpen = false;
+  });
+
   function hitungJumlahBarang() {
     const biaya = parseFloat(document.getElementById("biaya").value);
     const hargaJual = parseFloat(document.getElementById("hargaJual").value);
