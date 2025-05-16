@@ -38,6 +38,13 @@
       font-family: Georgia, serif;
       font-size: 1.8rem;
     }
+    .navbar .logo a {
+    color: white;
+    text-decoration: none;
+    }   
+    .navbar .logo a:hover {
+    color: rgb(255, 255, 255);
+    }
 
     .nav-links {
       display: flex;
